@@ -50,7 +50,7 @@ class MainScreenWidget extends StatelessWidget {
           SizedBox(
             height: 15.h,
           ),
-          SizedBox(height: 210.h, child: banner()),
+           SizedBox(height: 155.h, child: banner()),
           SizedBox(
             height: 10.h,
           ),
@@ -180,6 +180,7 @@ class banner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+       shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemCount: 10,
         itemBuilder: (context, index) => Padding(
@@ -203,15 +204,14 @@ class BannerItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipRRect(
-              borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(10), topRight: Radius.circular(8)),
-              child: Image.asset(
-                "assets/image/NoAvatarBanner.png",
-                width: 185.w,
-                height: 100.h,
-                fit: BoxFit.cover,
-              ),
+            Container(
+              width: 185.w,
+              height: 85.h,
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only( topLeft: Radius.circular(10), topRight: Radius.circular(8)),
+                  image:  DecorationImage(
+                      image: AssetImage("assets/image/NoAvatarBanner.png"),
+                      fit: BoxFit.cover)),
             ),
             Text(
               "MON 01 - MON 01",
