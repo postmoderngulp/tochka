@@ -3,7 +3,7 @@
    <application
         android:label="tochka_sbora"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/splashlogo">
         <activity
             android:name=".MainActivity"
             android:exported="true"

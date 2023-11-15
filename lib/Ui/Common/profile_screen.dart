@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:Tochka_Sbora/style/permanentEl/profile_app_bar.dart';
 import 'package:Tochka_Sbora/style/styles/colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../style/styles/text_style.dart';
 
@@ -47,10 +48,10 @@ class subProfileScreen extends StatelessWidget {
           Center(
             child: ElevatedButton.icon(
               onPressed: () {},
-              icon: Icon(
-                Icons.info,
-                size: 20.w,
-                color: colors.MainColor,
+              icon: SvgPicture.asset(
+                "assets/image/aboutMe.svg",
+                width: 20.w,
+                height: 20.h,
               ),
               label: Text(
                 "Обо мне",
@@ -123,10 +124,10 @@ class subProfileScreen extends StatelessWidget {
                 ),
                 ElevatedButton.icon(
                   onPressed: () {},
-                  icon: Icon(
-                    Icons.add,
-                    size: 20.w,
-                    color: colors.TextColor,
+                  icon: SvgPicture.asset(
+                    "assets/image/add.svg",
+                    width: 14.w,
+                    height: 14.h,
                   ),
                   label: Text(
                     "Добавить",

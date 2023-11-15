@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:Tochka_Sbora/style/permanentEl/main_app_bar.dart';
 import 'package:Tochka_Sbora/style/styles/colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../style/styles/button_style.dart';
 import '../../style/styles/text_style.dart';
@@ -123,10 +124,11 @@ class subSearch extends StatelessWidget {
               height: 30.h,
               child: ElevatedButton.icon(
                 onPressed: () {},
-                icon: Icon(
-                  Icons.location_on,
-                  size: 20.w,
-                  color: colors.TextColor,
+                icon: SvgPicture.asset(
+                  "assets/image/location.svg",
+                  width: 13.w,
+                  height: 15.h,
+                  color: Colors.grey,
                 ),
                 label: Text(
                   "Изменить",

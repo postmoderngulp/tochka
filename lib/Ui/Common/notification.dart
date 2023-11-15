@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../style/styles/text_style.dart';
 import '../../style/permanentEl/main_app_bar.dart';
@@ -33,9 +34,10 @@ class subNotification extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(
-            "assets/image/notification.png",
-            width: 90.w,
+          SvgPicture.asset(
+            "assets/image/notification.svg",
+            width: 65.w,
+            height: 65.h,
           ),
           SizedBox(
             height: 15.h,

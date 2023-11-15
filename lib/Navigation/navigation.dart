@@ -3,7 +3,6 @@ import 'package:Tochka_Sbora/Ui/Common/main_screen.dart';
 import 'package:Tochka_Sbora/Ui/Common/main_screen_common.dart';
 import 'package:Tochka_Sbora/Ui/Common/profile_screen.dart';
 import 'package:flutter/material.dart';
-import '../Ui/Authorized/Auth.dart';
 import '../Ui/Authorized/entry_screen.dart';
 import '../Ui/Authorized/sign_up.dart';
 import '../Ui/Authorized/sign_up_admin1.dart';
@@ -11,7 +10,6 @@ import '../Ui/Authorized/sign_up_admin2.dart';
 import '../Ui/Authorized/sign_up_user1.dart';
 
 abstract class NavigationRoutes {
-  static String AuthorizedPaths = 'auth';
   static String EntryScreen = 'auth/Entry';
   static String MainfromEntrScreen = 'auth/Entry/mainScreen';
   static String ChooseRegistrPaths = 'auth/choosR';
@@ -27,10 +25,9 @@ abstract class NavigationRoutes {
 }
 
 class NavigateService {
-  String initialRoute = NavigationRoutes.AuthorizedPaths;
+  String initialRoute = NavigationRoutes.EntryScreen;
 
   final routes = <String, Widget Function(BuildContext)>{
-    NavigationRoutes.AuthorizedPaths: (context) => const Authorized(),
     NavigationRoutes.ChooseRegistrPaths: (context) => const signUp(),
     NavigationRoutes.EntryScreen: (context) => const EntryScreen(),
     NavigationRoutes.MainfromEntrScreen: (context) => mainSreenCompany(),

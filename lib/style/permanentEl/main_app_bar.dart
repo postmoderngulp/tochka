@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:Tochka_Sbora/Domain/Models/main_appbar_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class MainAppBar extends StatefulWidget {
@@ -28,30 +29,30 @@ class subMainAppBar extends StatelessWidget {
     final model = context.read<MainAppBarModel>();
     return AppBar(
       centerTitle: true,
-      title: Image.asset(
-        "assets/image/logo.png",
-        width: 160.w,
-        height: 150.h,
+      title: SvgPicture.asset(
+        "assets/image/logo.svg",
+        width: 135.w,
+        height: 33.h,
       ),
       backgroundColor: Colors.white,
       actions: [
         Padding(
           padding: EdgeInsets.only(
-            right: 25.w,
+            right: 10.w,
           ),
           child: Container(
-            width: 30.w,
-            height: 10.h,
+            width: 38.w,
+            height: 38.h,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(50),
             ),
             child: IconButton(
               onPressed: () => model.goToProfileScreen(context),
-              icon: Icon(
-                Icons.person,
-                color: Colors.grey[400],
-                size: 30.w,
+              icon: SvgPicture.asset(
+                "assets/image/noAvatarUser.svg",
+                width: 38.w,
+                height: 38.h,
               ),
             ),
           ),

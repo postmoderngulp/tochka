@@ -26,8 +26,11 @@ class subEntryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = context.read<EntryModel>();
-    return Center(
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 37.w),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 230.h),
           Text(
@@ -37,49 +40,55 @@ class subEntryScreen extends StatelessWidget {
           SizedBox(
             height: 50.h,
           ),
-          SizedBox(
-            width: 300.w,
-            height: 45.h,
-            child: TextFormField(
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                    borderSide: BorderSide(color: colors.TextColor, width: 1),
-                    borderRadius: BorderRadius.circular(10.0)),
-                hintText: "E-mail",
-                hintStyle: TextStylee.second_text,
+          Center(
+            child: SizedBox(
+              width: 300.w,
+              height: 45.h,
+              child: TextFormField(
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: colors.TextColor, width: 1),
+                      borderRadius: BorderRadius.circular(10.0)),
+                  hintText: "E-mail",
+                  hintStyle: TextStylee.second_text,
+                ),
               ),
             ),
           ),
           SizedBox(height: 20.h),
-          SizedBox(
-            width: 300.w,
-            height: 45.h,
-            child: TextFormField(
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                    borderSide: BorderSide(color: colors.TextColor, width: 1),
-                    borderRadius: BorderRadius.circular(10.0)),
-                hintText: "Пароль",
-                hintStyle: TextStylee.second_text,
+          Center(
+            child: SizedBox(
+              width: 300.w,
+              height: 45.h,
+              child: TextFormField(
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: colors.TextColor, width: 1),
+                      borderRadius: BorderRadius.circular(10.0)),
+                  hintText: "Пароль",
+                  hintStyle: TextStylee.second_text,
+                ),
               ),
             ),
           ),
           SizedBox(
             height: 40.h,
           ),
-          SizedBox(
-            width: 120.w,
-            height: 45.h,
-            child: ElevatedButton(
-              onPressed: () => model.goToMainScreen(context),
-              style: Buttonstyle.main_button_style,
-              child: Text(
-                "Войти",
-                style: TextStylee.myDateWhite_text,
+          Center(
+            child: SizedBox(
+              width: 120.w,
+              height: 45.h,
+              child: ElevatedButton(
+                onPressed: () => model.goToMainScreen(context),
+                style: Buttonstyle.main_button_style,
+                child: Text(
+                  "Войти",
+                  style: TextStylee.myDateWhite_text,
+                ),
               ),
             ),
           ),

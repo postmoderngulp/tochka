@@ -1,6 +1,7 @@
 import 'package:Tochka_Sbora/style/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 class ProfileAppBar extends StatelessWidget {
   const ProfileAppBar({super.key});
@@ -20,17 +21,19 @@ class ProfileAppBar extends StatelessWidget {
         onPressed: () {
           Navigator.of(context).pop();
         },
-        icon: Icon(
-          Icons.arrow_back_ios,
-          size: 20.w,
+        icon: SvgPicture.asset(
+          "assets/image/backArrow.svg",
+          width: 19.w,
+          height: 19.h,
         ),
       ),
       actions: [
         IconButton(
             onPressed: () {},
-            icon: Icon(
-              Icons.settings,
-              size: 20.w,
+            icon: SvgPicture.asset(
+              "assets/image/settings.svg",
+              width: 19.w,
+              height: 19.h,
             ))
       ],
     );

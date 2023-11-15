@@ -1,9 +1,12 @@
+import 'package:Tochka_Sbora/Domain/Models/main_screen_model.dart';
 import 'package:flutter/material.dart';
 import 'package:Tochka_Sbora/style/permanentEl/main_app_bar.dart';
 import 'package:Tochka_Sbora/style/styles/colors.dart';
 import 'package:Tochka_Sbora/style/styles/text_style.dart';
 import 'package:Tochka_Sbora/style/styles/button_style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import '../../Navigation/navigation.dart';
 
 class MainScreen extends StatelessWidget {
@@ -17,7 +20,9 @@ class MainScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         appBar: PreferredSize(
             preferredSize: Size(1.w, 60.h), child: const MainAppBar()),
-        body: const MainScreenWidget(),
+        body: ChangeNotifierProvider(
+            create: (BuildContext context) => mainScreenModel(),
+            child: const MainScreenWidget()),
       ),
     );
   }
@@ -113,9 +118,10 @@ class findGroupBox extends StatelessWidget {
           height: 35.h,
           child: ElevatedButton.icon(
             onPressed: () {},
-            icon: Icon(
-              Icons.search,
-              size: 20.w,
+            icon: SvgPicture.asset(
+              "assets/image/search.svg",
+              width: 10.w,
+              height: 10.h,
             ),
             label: Text(
               "Найти группу",
@@ -143,10 +149,10 @@ class locationBox extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {},
-            icon: Icon(
-              Icons.location_on,
-              size: 25.w,
-              color: Colors.white,
+            icon: SvgPicture.asset(
+              "assets/image/location.svg",
+              width: 13.w,
+              height: 15.h,
             ),
           ),
           SizedBox(
@@ -194,6 +200,7 @@ class BannerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final model = context.watch<mainScreenModel>();
     return Container(
       decoration: BoxDecoration(
           color: Colors.white,
@@ -231,12 +238,21 @@ class BannerItem extends StatelessWidget {
                     SizedBox(
                       width: 60.w,
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 5.h),
-                      child: Icon(
-                        Icons.heart_broken,
-                        color: Colors.red,
-                        size: 22.w,
+                    GestureDetector(
+                      onTap: () => model.setLike(),
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: 5.h),
+                        child: model.isLike
+                            ? SvgPicture.asset(
+                                "assets/image/like.svg",
+                                width: 19.w,
+                                height: 17.h,
+                              )
+                            : SvgPicture.asset(
+                                "assets/image/notLike.svg",
+                                width: 19.w,
+                                height: 17.h,
+                              ),
                       ),
                     ),
                     Padding(
@@ -287,54 +303,69 @@ class GroupBannerItem extends StatelessWidget {
         border: Border.all(color: colors.TextColor),
         borderRadius: const BorderRadius.all(Radius.circular(10)),
       ),
-      child: Column(children: [
-        SizedBox(
-          height: 20.h,
-        ),
-        Padding(
-          padding: EdgeInsets.only(
-            left: 30.w,
-          ),
-          child: Row(
-            children: [
-              Image.asset(
-                "assets/image/groupPhoto.png",
-                width: 80.w,
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 15.w, bottom: 10.h),
-                child: Column(
-                  children: [
-                    Text(
-                      "Name Group",
-                      style: TextStylee.bannerName_text,
+      child: Row(
+        children: [
+          Column(children: [
+            SizedBox(
+              height: 20.h,
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 30.w, right: 10.w),
+              child: Row(
+                children: [
+                  Image.asset(
+                    "assets/image/groupPhoto.png",
+                    width: 80.w,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 15.w, bottom: 10.h),
+                    child: Column(
+                      children: [
+                        Text(
+                          "Name Group",
+                          style: TextStylee.bannerName_text,
+                        ),
+                        Text(
+                          "15 участников",
+                          style: TextStylee.bannerDate_text,
+                        )
+                      ],
                     ),
-                    Text(
-                      "15 участников",
-                      style: TextStylee.bannerDate_text,
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(left: 100.w),
-          child: SizedBox(
-            width: 134.w,
-            height: 30.h,
-            child: ElevatedButton(
-              onPressed: () {},
-              style: Buttonstyle.baseMain_button_style,
-              child: Text(
-                "Присоединиться",
-                style: TextStylee.Banner_text,
+                  ),
+                ],
               ),
             ),
-          ),
-        ),
-      ]),
+            Padding(
+              padding: EdgeInsets.only(left: 100.w),
+              child: SizedBox(
+                width: 134.w,
+                height: 30.h,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: Buttonstyle.baseMain_button_style,
+                  child: Text(
+                    "Присоединиться",
+                    style: TextStylee.Banner_text,
+                  ),
+                ),
+              ),
+            ),
+          ]),
+          Expanded(
+            child: Align(
+              alignment: Alignment.topRight,
+              child: Padding(
+                padding: EdgeInsets.only(top: 10.h, right: 10.w),
+                child: SvgPicture.asset(
+                  "assets/image/close.svg",
+                  width: 9.w,
+                  height: 9.h,
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
