@@ -19,6 +19,12 @@ abstract class TextStylee {
       color: colors.MainColor, fontFamily: "GeometriaMedium", fontSize: 28.sp);
   static TextStyle hobby_text = TextStyle(
       color: Colors.white, fontFamily: "GeometriaMedium", fontSize: 16.sp);
+  static TextStyle inactive_hobby_text = TextStyle(
+      color: colors.oranjeColor,
+      fontFamily: "GeometriaMedium",
+      fontSize: 16.sp);
+  static TextStyle subSubTitletext = TextStyle(
+      color: colors.MainColor, fontFamily: "GeometriaMedium", fontSize: 10.sp);
   static TextStyle main_title_text = TextStyle(
       color: Colors.black, fontFamily: "GeometriaBold", fontSize: 32.sp);
   static TextStyle subAlert_title_text = TextStyle(

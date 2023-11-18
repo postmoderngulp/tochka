@@ -1,13 +1,12 @@
 import 'package:Tochka_Sbora/Domain/Models/main_screen_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:Tochka_Sbora/style/permanentEl/main_app_bar.dart';
 import 'package:Tochka_Sbora/style/styles/colors.dart';
 import 'package:Tochka_Sbora/style/styles/text_style.dart';
 import 'package:Tochka_Sbora/style/styles/button_style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import '../../Navigation/navigation.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -18,8 +17,6 @@ class MainScreen extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
-        appBar: PreferredSize(
-            preferredSize: Size(1.w, 60.h), child: const MainAppBar()),
         body: ChangeNotifierProvider(
             create: (BuildContext context) => mainScreenModel(),
             child: const MainScreenWidget()),
@@ -39,31 +36,49 @@ class MainScreenWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 10.h,
+            height: 32.h,
           ),
-          const locationBox(),
+          const searchField(),
           SizedBox(
-            height: 20.h,
+            height: 50.h,
           ),
           Padding(
-            padding: EdgeInsets.only(left: 20.w),
-            child: Text(
-              "Что нового",
-              style: TextStylee.homepage_text,
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: Row(
+              children: [
+                Text(
+                  "Что нового",
+                  style: TextStylee.homepage_text,
+                ),
+                const Spacer(),
+                Text(
+                  "Посмотреть все",
+                  style: TextStylee.subSubTitletext,
+                ),
+              ],
             ),
           ),
           SizedBox(
             height: 15.h,
           ),
-           SizedBox(height: 155.h, child: banner()),
+          SizedBox(height: 155.h, child: banner()),
           SizedBox(
             height: 10.h,
           ),
           Padding(
-            padding: EdgeInsets.only(left: 20.w),
-            child: Text(
-              "Группы в вашем городе",
-              style: TextStylee.homepage_text,
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: Row(
+              children: [
+                Text(
+                  "Группы в вашем городе",
+                  style: TextStylee.homepage_text,
+                ),
+                const Spacer(),
+                Text(
+                  "Посмотреть все",
+                  style: TextStylee.subSubTitletext,
+                ),
+              ],
             ),
           ),
           SizedBox(
@@ -73,110 +88,39 @@ class MainScreenWidget extends StatelessWidget {
           SizedBox(
             height: 15.h,
           ),
-          Padding(
-            padding: EdgeInsets.only(left: 20.w),
-            child: Text(
-              "Ваши группы",
-              style: TextStylee.homepage_text,
-            ),
-          ),
-          SizedBox(
-            height: 15.h,
-          ),
-          SizedBox(
-            height: 15.h,
-          ),
-          const findGroupBox(),
         ],
       ),
     );
   }
 }
 
-class findGroupBox extends StatelessWidget {
-  const findGroupBox({super.key});
-
+class searchField extends StatelessWidget {
+  const searchField({super.key});
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: 90.h,
-      decoration: BoxDecoration(border: Border.all(color: colors.TextColor)),
-      child: Column(children: [
-        SizedBox(
-          height: 15.h,
-        ),
-        Padding(
-          padding: EdgeInsets.only(bottom: 10.h),
-          child: Text(
-            "У вас пока нет групп",
-            style: TextStylee.bannerGroup_text,
+    final model = context.watch<mainScreenModel>();
+    return Center(
+      child: SizedBox(
+        width: 305.w,
+        height: 40.h,
+        child: CupertinoTextField(
+          padding: EdgeInsets.symmetric(horizontal: 19.w, vertical: 12.h),
+          prefix: SvgPicture.asset(
+            "assets/image/search.svg",
+            width: 14.w,
+            height: 14.h,
+          ),
+          keyboardType: TextInputType.emailAddress,
+          onEditingComplete: () => FocusScope.of(context).nextFocus(),
+          onChanged: (value) {},
+          placeholder: "Найти событие",
+          placeholderStyle: TextStylee.second_text,
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey),
+            color: Colors.white,
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),
         ),
-        SizedBox(
-          width: 155.w,
-          height: 35.h,
-          child: ElevatedButton.icon(
-            onPressed: () {},
-            icon: SvgPicture.asset(
-              "assets/image/search.svg",
-              width: 10.w,
-              height: 10.h,
-            ),
-            label: Text(
-              "Найти группу",
-              style: TextStylee.white_text,
-            ),
-            style: Buttonstyle.main_button_style,
-          ),
-        ),
-      ]),
-    );
-  }
-}
-
-class locationBox extends StatelessWidget {
-  const locationBox({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(color: colors.MainColor),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 20.w,
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: SvgPicture.asset(
-              "assets/image/location.svg",
-              width: 13.w,
-              height: 15.h,
-            ),
-          ),
-          SizedBox(
-            width: 5.w,
-          ),
-          TextButton(
-            onPressed: () => Navigator.of(context)
-                .pushNamed(NavigationRoutes.chooseLocation),
-            child: Text(
-              "Ваше местоположение",
-              style: TextStylee.location_text,
-            ),
-          ),
-          SizedBox(
-            width: 50.w,
-          ),
-          TextButton(
-            onPressed: () {},
-            child: Text(
-              "Оренбург",
-              style: TextStylee.light_location_text,
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -186,7 +130,7 @@ class banner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-       shrinkWrap: true,
+        shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemCount: 10,
         itemBuilder: (context, index) => Padding(
@@ -215,8 +159,10 @@ class BannerItem extends StatelessWidget {
               width: 185.w,
               height: 85.h,
               decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only( topLeft: Radius.circular(10), topRight: Radius.circular(8)),
-                  image:  DecorationImage(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(8)),
+                  image: DecorationImage(
                       image: AssetImage("assets/image/NoAvatarBanner.png"),
                       fit: BoxFit.cover)),
             ),

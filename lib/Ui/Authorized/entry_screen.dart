@@ -80,8 +80,8 @@ class subEntryScreen extends StatelessWidget {
           ),
           Center(
             child: SizedBox(
-              width: 120.w,
-              height: 45.h,
+              width: 197.w,
+              height: 46.h,
               child: ElevatedButton(
                 onPressed: () => model.goToMainScreen(context),
                 style: Buttonstyle.main_button_style,
@@ -96,9 +96,9 @@ class subEntryScreen extends StatelessWidget {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: TextButton(
-                  onPressed: () {},
+                  onPressed: () => model.goToRegistr(context),
                   child: Text(
-                    "Проблемы со входом?",
+                    "Еще нет аккаунта? Зарегистрироваться ",
                     style: TextStylee.second_text,
                   )),
             ),

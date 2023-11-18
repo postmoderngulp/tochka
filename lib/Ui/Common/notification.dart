@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-
 import '../../style/styles/text_style.dart';
-import '../../style/permanentEl/main_app_bar.dart';
 
 class notification extends StatefulWidget {
   const notification({super.key});
@@ -15,11 +13,9 @@ class notification extends StatefulWidget {
 class _NotificationState extends State<notification> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return const SafeArea(
       child: Scaffold(
-        appBar: PreferredSize(
-            preferredSize: Size(1.w, 60.h), child: const MainAppBar()),
-        body: const subNotification(),
+        body: subNotification(),
       ),
     );
   }

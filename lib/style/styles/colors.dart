@@ -12,6 +12,6 @@ abstract class colors {
   static Color BusinessColor = const Color.fromRGBO(245, 193, 228, 1);
   static Color CommunicationColor = const Color.fromRGBO(185, 235, 229, 1);
   static Color SelfColor = const Color.fromRGBO(255, 138, 138, 1);
-
+  static Color oranjeColor = const Color.fromRGBO(249, 173, 118, 1);
   static Color GrdientColor = const Color.fromRGBO(74, 235, 216, 1);
 }

@@ -76,6 +76,18 @@ class subSignUpUser1 extends StatelessWidget {
               height: 90.h,
             ),
             const continueButton(),
+            SizedBox(
+              height: 61.h,
+            ),
+            Center(
+              child: TextButton(
+                onPressed: () => model.goToSignUpAdmin(context),
+                child: Text(
+                  "Зарегистрироваться как администратор",
+                  style: TextStylee.second_text,
+                ),
+              ),
+            ),
           ]),
     );
   }
@@ -185,8 +197,8 @@ class continueButton extends StatelessWidget {
     final model = context.watch<SignUpUser1Model>();
     return Center(
       child: SizedBox(
-        width: 180.w,
-        height: 50.h,
+        width: 175.w,
+        height: 46.h,
         child: ElevatedButton(
           onPressed: () => model.goToSignUpUser2(context),
           style: Buttonstyle.baseMain_button_style,

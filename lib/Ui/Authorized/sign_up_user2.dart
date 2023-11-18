@@ -2,7 +2,6 @@ import 'package:Tochka_Sbora/style/styles/button_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:Tochka_Sbora/style/styles/colors.dart';
 import '../../Domain/Models/sign_up_user2_model.dart';
 import '../../style/styles/text_style.dart';
 
@@ -14,7 +13,7 @@ class SignUpUser2 extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: Provider(
+        body: ChangeNotifierProvider(
             create: (context) => SignUpUser2Model(),
             child: const subSignUpUser2()),
       ),
@@ -27,7 +26,8 @@ class subSignUpUser2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = context.read<SignUpUser2Model>();
+    final model = context.watch<SignUpUser2Model>();
+    final dropValue = ValueNotifier('');
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w),
       child: Column(
@@ -35,7 +35,7 @@ class subSignUpUser2 extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 140.h,
+            height: 77.h,
           ),
           Text(
             "Выбери свои",
@@ -46,131 +46,94 @@ class subSignUpUser2 extends StatelessWidget {
             style: TextStylee.title_text,
           ),
           SizedBox(
+            height: 27.h,
+          ),
+          Text(
+            "На основе ваших интересов мы подберем наиболее подходящие мероприятия и группы",
+            style: TextStylee.second_text,
+          ),
+          SizedBox(
             height: 40.h,
           ),
           Column(
             children: [
               SizedBox(
-                width: 350.w,
-                height: 45.h,
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: colors.TextColor, width: 1),
-                        borderRadius: BorderRadius.circular(10.0)),
-                    hintText: "Найти увлечение...",
-                    hintStyle: TextStylee.second_text,
-                  ),
+                width: 335.w,
+                height: 50.h,
+                child: Material(
+                  child: ValueListenableBuilder(
+                      valueListenable: dropValue,
+                      builder: (BuildContext context, String value, _) {
+                        return DropdownButtonFormField(
+                          decoration: InputDecoration(
+                            filled: true,
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 10.0, vertical: 15.0),
+                            fillColor: Colors.transparent,
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(
+                                    color: Colors.transparent, width: 0)),
+                            errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(
+                                    color: Colors.transparent, width: 0)),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(
+                                    color: Colors.transparent, width: 0)),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(
+                                    color: Colors.transparent, width: 0)),
+                          ),
+                          isExpanded: true,
+                          hint: Text(
+                            'Выбрать категорию',
+                            style: TextStylee.second_text,
+                          ),
+                          icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                          value: (value.isEmpty) ? null : value,
+                          onChanged: (choice) {
+                            dropValue.value = choice.toString();
+                          },
+                          items: model.listHobby
+                              .map((e) => DropdownMenuItem(
+                                    value: e,
+                                    child: Text(e),
+                                  ))
+                              .toList(),
+                        );
+                      }),
                 ),
               ),
               SizedBox(
                 height: 50.h,
               ),
+              Wrap(
+                  children: List.generate(
+                model.listHobby.length,
+                (index) => Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 9.w, vertical: 5.h),
+                  child: SizedBox(
+                    height: 40.h,
+                    child: ElevatedButton(
+                      onPressed: () => model.setVal(index),
+                      style: model.val == index
+                          ? Buttonstyle.self_button_style
+                          : Buttonstyle.inActive_self_button_style,
+                      child: Text(
+                        model.listHobby[index],
+                        style: model.val == index
+                            ? TextStylee.hobby_text
+                            : TextStylee.inactive_hobby_text,
+                      ),
+                    ),
+                  ),
+                ),
+              )),
               Column(
                 children: [
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 160.w,
-                        height: 45.h,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: Buttonstyle.edu_button_style,
-                          child: Text(
-                            "Учеба",
-                            style: TextStylee.hobby_text,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10.w,
-                      ),
-                      SizedBox(
-                        width: 160.w,
-                        height: 45.h,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: Buttonstyle.sport_button_style,
-                          child: Text(
-                            "Спорт",
-                            style: TextStylee.hobby_text,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15.h,
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 160.w,
-                        height: 45.h,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: Buttonstyle.language_button_style,
-                          child: Text(
-                            "Ин Языки",
-                            style: TextStylee.hobby_text,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10.w,
-                      ),
-                      SizedBox(
-                        width: 160.w,
-                        height: 45.h,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: Buttonstyle.business_button_style,
-                          child: Text(
-                            "Бизнес",
-                            style: TextStylee.hobby_text,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15.h,
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 160.w,
-                        height: 45.h,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: Buttonstyle.communicate_button_style,
-                          child: Text(
-                            "Общение",
-                            style: TextStylee.hobby_text,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10.w,
-                      ),
-                      SizedBox(
-                        width: 160.w,
-                        height: 45.h,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: Buttonstyle.self_button_style,
-                          child: Text(
-                            "Саморазвитие",
-                            style: TextStylee.hobby_text,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 50.h),
-                    ],
-                  ),
                   SizedBox(
                     height: 80.h,
                   ),
@@ -181,12 +144,24 @@ class subSignUpUser2 extends StatelessWidget {
                       onPressed: () => model.goToRegistrUser2(context),
                       style: Buttonstyle.baseMain_button_style,
                       child: Text(
-                        "Продолжить",
+                        "Завершить",
                         style: TextStylee.main_text,
                       ),
                     ),
                   ),
                 ],
+              ),
+              SizedBox(
+                height: 22.h,
+              ),
+              Center(
+                child: TextButton(
+                  onPressed: () => model.goToRegistrUser2(context),
+                  child: Text(
+                    "Пропустить",
+                    style: TextStylee.second_text,
+                  ),
+                ),
               ),
             ],
           ),

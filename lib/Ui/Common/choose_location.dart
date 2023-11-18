@@ -1,6 +1,5 @@
 import 'package:Tochka_Sbora/style/styles/text_style.dart';
 import 'package:flutter/material.dart';
-import 'package:Tochka_Sbora/style/permanentEl/main_app_bar.dart';
 
 class chooseLocation extends StatelessWidget {
   const chooseLocation({super.key});
@@ -8,7 +7,6 @@ class chooseLocation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: PreferredSize(preferredSize: Size(1, 60), child: MainAppBar()),
       body: Column(
         children: [
           Padding(

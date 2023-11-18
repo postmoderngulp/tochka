@@ -1,6 +1,6 @@
 import 'package:Tochka_Sbora/Ui/Common/main_screen.dart';
 import 'package:Tochka_Sbora/Ui/Common/notification.dart';
-import 'package:Tochka_Sbora/Ui/Common/search.dart';
+import 'package:Tochka_Sbora/Ui/Common/profile_screen.dart';
 import 'package:Tochka_Sbora/style/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,8 +16,8 @@ class mainSreenCompany extends StatefulWidget {
 class _mainSreenCompanyState extends State<mainSreenCompany> {
   final List<Widget> _tabs = [
     const MainScreen(),
-    const Search(),
-    const notification()
+    const notification(),
+    const ProfileScreen()
   ];
 
   void tapBar(int index) {
@@ -44,22 +44,22 @@ class _mainSreenCompanyState extends State<mainSreenCompany> {
             BottomNavigationBarItem(
               icon: ImageIcon(
                 const AssetImage('assets/image/home.png'),
-                size: 32.w,
+                size: 20.w,
               ),
               label: 'Главная',
             ),
             BottomNavigationBarItem(
                 icon: ImageIcon(
-                  const AssetImage('assets/image/search.png'),
-                  size: 32.w,
+                  const AssetImage('assets/image/notification.png'),
+                  size: 20.w,
                 ),
-                label: 'Поиск'),
+                label: 'Уведомления'),
             BottomNavigationBarItem(
               icon: ImageIcon(
-                const AssetImage('assets/image/notification_icon.png'),
-                size: 32.w,
+                const AssetImage('assets/image/profile.png'),
+                size: 20.w,
               ),
-              label: 'Уведомления',
+              label: 'Профиль',
             ),
           ],
         ),

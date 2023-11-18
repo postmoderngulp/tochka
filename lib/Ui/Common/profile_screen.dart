@@ -1,10 +1,6 @@
-import 'package:Tochka_Sbora/style/styles/button_style.dart';
 import 'package:flutter/material.dart';
-import 'package:Tochka_Sbora/style/permanentEl/profile_app_bar.dart';
-import 'package:Tochka_Sbora/style/styles/colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-
 import '../../style/styles/text_style.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -12,12 +8,10 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return const SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: PreferredSize(
-            preferredSize: Size(1.w, 75.h), child: const ProfileAppBar()),
-        body: const subProfileScreen(),
+        body: subProfileScreen(),
       ),
     );
   }
@@ -141,7 +135,6 @@ class subProfileScreen extends StatelessWidget {
               ],
             ),
           ),
-          const HobbyList(),
           SizedBox(
             height: 15.h,
           ),
@@ -155,103 +148,8 @@ class subProfileScreen extends StatelessWidget {
           SizedBox(
             height: 10.h,
           ),
-          const nameGroup(),
         ],
       ),
     );
-  }
-}
-
-class nameGroup extends StatelessWidget {
-  const nameGroup({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-        physics: const ClampingScrollPhysics(),
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-        itemCount: 15,
-        itemBuilder: (context, index) {
-          return const itemNameGroup();
-        });
-  }
-}
-
-class itemNameGroup extends StatelessWidget {
-  const itemNameGroup({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: const CircleAvatar(
-        backgroundImage: AssetImage("assets/image/NoAvatarBanner.png"),
-      ),
-      title: Text(
-        "Name group",
-        style: TextStylee.bannerGroup_text,
-      ),
-      subtitle: Text(
-        "15 участников",
-        style: TextStylee.bannerGroup_text,
-      ),
-      trailing: Icon(
-        Icons.arrow_back_ios,
-        color: colors.MainColor,
-        size: 20.w,
-      ),
-    );
-  }
-}
-
-class HobbyList extends StatelessWidget {
-  const HobbyList({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-        shrinkWrap: true,
-        scrollDirection: Axis.vertical,
-        itemCount: 2,
-        itemBuilder: (context, index) => Padding(
-              padding: EdgeInsets.symmetric(vertical: 5.h),
-              child: SizedBox(height: 35.h, child: GroupHobbyBanner()),
-            ));
-  }
-}
-
-class GroupHobbyBanner extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemCount: 10,
-        itemBuilder: (context, index) => Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: const GroupHobbyBanneritem(),
-            ));
-  }
-}
-
-class GroupHobbyBanneritem extends StatelessWidget {
-  const GroupHobbyBanneritem({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(children: [
-      SizedBox(
-        width: 160.w,
-        height: 35.h,
-        child: ElevatedButton(
-          onPressed: () {},
-          style: Buttonstyle.edu_button_style,
-          child: Text(
-            "Учеба",
-            style: TextStylee.white_text,
-          ),
-        ),
-      ),
-    ]);
   }
 }
