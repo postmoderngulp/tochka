@@ -1,23 +1,23 @@
-import 'package:Tochka_Sbora/Ui/Common/main_screen.dart';
-import 'package:Tochka_Sbora/Ui/Common/notification.dart';
-import 'package:Tochka_Sbora/Ui/Common/profile_screen.dart';
+import 'package:Tochka_Sbora/Ui/Admin/main_screen.dart';
+import 'package:Tochka_Sbora/Ui/Admin/notification_admin.dart';
+import 'package:Tochka_Sbora/Ui/Admin/profile_admin.dart';
 import 'package:Tochka_Sbora/style/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class mainSreenCommon extends StatefulWidget {
+class mainSreenAdmin extends StatefulWidget {
   int selectIndex = 0;
-  mainSreenCommon({super.key});
+  mainSreenAdmin({super.key});
 
   @override
-  State<mainSreenCommon> createState() => _mainSreenCompanyState();
+  State<mainSreenAdmin> createState() => _mainSreenCompanyState();
 }
 
-class _mainSreenCompanyState extends State<mainSreenCommon> {
+class _mainSreenCompanyState extends State<mainSreenAdmin> {
   final List<Widget> _tabs = [
-    const MainScreen(),
-    const notification(),
-    const ProfileScreen()
+    const MainScreenAdmin(),
+    const notificationAdmin(),
+    const ProfileAdminScreen()
   ];
 
   void tapBar(int index) {

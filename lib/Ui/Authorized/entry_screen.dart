@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:Tochka_Sbora/style/styles/colors.dart';
-import '../../Domain/Models/entry_model.dart';
+import '../../Domain/Models/authModel/entry_model.dart';
 import '../../style/styles/button_style.dart';
 import '../../style/styles/text_style.dart';
 
@@ -13,6 +13,7 @@ class EntryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: Provider(
           create: (context) => EntryModel(), child: const subEntryScreen()),
@@ -45,6 +46,7 @@ class subEntryScreen extends StatelessWidget {
               width: 300.w,
               height: 45.h,
               child: TextFormField(
+                onChanged: (value) => model.nickName = value,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
@@ -63,6 +65,7 @@ class subEntryScreen extends StatelessWidget {
               width: 300.w,
               height: 45.h,
               child: TextFormField(
+                onChanged: (value) => model.password = value,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
@@ -83,7 +86,8 @@ class subEntryScreen extends StatelessWidget {
               width: 197.w,
               height: 46.h,
               child: ElevatedButton(
-                onPressed: () => model.goToMainScreen(context),
+                onPressed: () =>
+                    model.goEnter(model.nickName, model.password, context),
                 style: Buttonstyle.main_button_style,
                 child: Text(
                   "Войти",

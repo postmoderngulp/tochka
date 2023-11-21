@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:Tochka_Sbora/style/styles/colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import '../../Domain/Models/sign_up_admin1_model.dart';
+import '../../Domain/Models/authModel/sign_up_admin1_model.dart';
 import '../../style/styles/text_style.dart';
 
 class SignUpAdmin1 extends StatelessWidget {
@@ -73,8 +73,30 @@ class subSignUpAdmin1 extends StatelessWidget {
             SizedBox(
               height: 90.h,
             ),
-            const continueButton()
+            const continueButton(),
+            SizedBox(
+              height: 61.h,
+            ),
+            const linkUser()
           ]),
+    );
+  }
+}
+
+class linkUser extends StatelessWidget {
+  const linkUser({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final model = context.read<SignUpAdmin1Model>();
+    return Center(
+      child: TextButton(
+        onPressed: () => model.goToSignUpUser(context),
+        child: Text(
+          "Зарегистрироваться как пользователь",
+          style: TextStylee.second_text,
+        ),
+      ),
     );
   }
 }

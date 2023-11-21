@@ -7,6 +7,8 @@ abstract class TextStylee {
       color: colors.MainColor, fontFamily: "HelveticaRegular", fontSize: 14.sp);
   static TextStyle second_text = TextStyle(
       color: colors.TextColor, fontFamily: "GeometriaLight", fontSize: 12.sp);
+  static TextStyle Subsecond_text = TextStyle(
+      color: colors.TextColor, fontFamily: "GeometriaLight", fontSize: 9.sp);
   static TextStyle Localsecond_text = TextStyle(
       color: colors.TextColor, fontFamily: "GeometriaMedium", fontSize: 12.sp);
   static TextStyle big_second_text = TextStyle(

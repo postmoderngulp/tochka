@@ -3,7 +3,7 @@ import 'package:Tochka_Sbora/style/styles/colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:Tochka_Sbora/style/styles/button_style.dart';
-import '../../Domain/Models/sign_up_admin2_model.dart';
+import '../../Domain/Models/authModel/sign_up_admin2_model.dart';
 import '../../style/styles/text_style.dart';
 
 class SignUpAdmin2 extends StatelessWidget {

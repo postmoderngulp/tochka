@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../Navigation/navigation.dart';
+import '../../../Navigation/navigation.dart';
 
 class AuthModel {
   void goToEntry(BuildContext context) {

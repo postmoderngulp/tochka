@@ -5,7 +5,7 @@ abstract class colors {
   static Color AccentColor = const Color.fromRGBO(185, 235, 229, 1);
   static Color TitleColor = const Color.fromRGBO(49, 49, 49, 1);
   static Color TextColor = const Color.fromRGBO(166, 166, 166, 1);
-
+  static Color yeloww = const Color.fromRGBO(255, 210, 79, 1);
   static Color LearnColor = const Color.fromRGBO(205, 155, 255, 1);
   static Color SportColor = const Color.fromRGBO(180, 248, 148, 1);
   static Color LanguageColor = const Color.fromRGBO(167, 165, 231, 1);

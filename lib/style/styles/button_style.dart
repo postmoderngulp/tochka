@@ -8,6 +8,12 @@ abstract class Buttonstyle {
       shape: MaterialStateProperty.all(RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       )));
+  static ButtonStyle yeloww_button_style = ButtonStyle(
+      elevation: MaterialStateProperty.all(0),
+      backgroundColor: MaterialStateProperty.all(colors.yeloww),
+      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      )));
   static ButtonStyle base_button_style = ButtonStyle(
       elevation: MaterialStateProperty.all(0),
       backgroundColor: MaterialStateProperty.all(Colors.white),
