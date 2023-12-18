@@ -3,17 +3,17 @@ import 'package:Tochka_Sbora/Domain/Entity/event.dart';
 import 'package:Tochka_Sbora/Navigation/Navigation.dart';
 import 'package:flutter/material.dart';
 
-class mainScreenModel extends ChangeNotifier {
+class mainScreenOrganizerModel extends ChangeNotifier {
   bool isDone = false;
   List<event> listEvent = [];
 
-  mainScreenModel() {
-    _setup();
+  void setDone() {
+    isDone = !isDone;
+    notifyListeners();
   }
 
-  void goToMoreInfoUser(BuildContext context, event event) {
-    Navigator.of(context)
-        .pushNamed(NavigationRoutes.MoreInfoEventUser, arguments: event);
+  mainScreenOrganizerModel() {
+    _setup();
   }
 
   void _setup() async {
@@ -22,8 +22,8 @@ class mainScreenModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setDone() {
-    isDone = !isDone;
-    notifyListeners();
+  void goToInfoEvent(BuildContext context, event event) {
+    Navigator.of(context)
+        .pushNamed(NavigationRoutes.MoreInfoEventAdmin, arguments: event);
   }
 }

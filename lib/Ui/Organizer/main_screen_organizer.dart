@@ -1,23 +1,23 @@
-import 'package:Tochka_Sbora/Ui/Admin/main_screen.dart';
-import 'package:Tochka_Sbora/Ui/Admin/notification_admin.dart';
-import 'package:Tochka_Sbora/Ui/Admin/profile_admin.dart';
+import 'package:Tochka_Sbora/Ui/Organizer/main_screen.dart';
+import 'package:Tochka_Sbora/Ui/Organizer/notification_organizer.dart';
+import 'package:Tochka_Sbora/Ui/Organizer/profile_organizer.dart';
 import 'package:Tochka_Sbora/style/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class mainSreenAdmin extends StatefulWidget {
+class mainSreenOrganizer extends StatefulWidget {
   int selectIndex = 0;
-  mainSreenAdmin({super.key});
+  mainSreenOrganizer({super.key});
 
   @override
-  State<mainSreenAdmin> createState() => _mainSreenCompanyState();
+  State<mainSreenOrganizer> createState() => _mainSreenCompanyState();
 }
 
-class _mainSreenCompanyState extends State<mainSreenAdmin> {
+class _mainSreenCompanyState extends State<mainSreenOrganizer> {
   final List<Widget> _tabs = [
-    const MainScreenAdmin(),
-    const notificationAdmin(),
-    const ProfileAdminScreen()
+    const MainScreenOrganizer(),
+    const notificationOrganizer(),
+    const ProfileOrganizerScreen()
   ];
 
   void tapBar(int index) {

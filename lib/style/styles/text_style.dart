@@ -28,7 +28,7 @@ abstract class TextStylee {
   static TextStyle subSubTitletext = TextStyle(
       color: colors.MainColor, fontFamily: "GeometriaMedium", fontSize: 10.sp);
   static TextStyle main_title_text = TextStyle(
-      color: Colors.black, fontFamily: "GeometriaBold", fontSize: 32.sp);
+      color: Colors.black, fontFamily: "GeometriaBold", fontSize: 25.sp);
   static TextStyle subAlert_title_text = TextStyle(
       color: Colors.black, fontFamily: "GeometriaMedium", fontSize: 16.sp);
   static TextStyle appBar_title_text = TextStyle(

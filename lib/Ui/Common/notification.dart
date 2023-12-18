@@ -27,33 +27,36 @@ class subNotification extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SvgPicture.asset(
-            "assets/image/notification.svg",
-            width: 65.w,
-            height: 65.h,
-          ),
-          SizedBox(
-            height: 15.h,
-          ),
-          Text(
-            "У вас пока нет уведомлений!",
-            style: TextStylee.NotNotification_text,
-          ),
-          SizedBox(
-            height: 5.h,
-          ),
-          Text(
-            "Здесь будут отображаться групповые",
-            style: TextStylee.second_text,
-          ),
-          Text(
-            "уведомления  и напоминания о мероприятиях",
-            style: TextStylee.second_text,
-          ),
-        ],
+      child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SvgPicture.asset(
+              "assets/image/notification.svg",
+              width: 65.w,
+              height: 65.h,
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
+            Text(
+              "У вас пока нет уведомлений!",
+              style: TextStylee.NotNotification_text,
+            ),
+            SizedBox(
+              height: 5.h,
+            ),
+            Text(
+              "Здесь будут отображаться групповые",
+              style: TextStylee.second_text,
+            ),
+            Text(
+              "уведомления  и напоминания о мероприятиях",
+              style: TextStylee.second_text,
+            ),
+          ],
+        ),
       ),
     );
   }

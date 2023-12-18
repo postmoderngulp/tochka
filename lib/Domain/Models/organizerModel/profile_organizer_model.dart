@@ -6,7 +6,7 @@ import 'package:Tochka_Sbora/Navigation/navigation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-class ProfileAdminModel extends ChangeNotifier {
+class ProfileOrganizerModel extends ChangeNotifier {
   bool isDone = false;
   List<event> listMyEvent = [];
   String path = "";
@@ -14,7 +14,7 @@ class ProfileAdminModel extends ChangeNotifier {
   String Surname = "";
   String email = "";
 
-  ProfileAdminModel() {
+  ProfileOrganizerModel() {
     _setup();
   }
 
@@ -26,7 +26,6 @@ class ProfileAdminModel extends ChangeNotifier {
     final Token = token?.split(".")[1];
     List<int> res = base64.decode(base64.normalize(Token!));
     final decodeVal = utf8.decode(res);
-    final listToken = decodeVal.split(":");
 
     const start = "\"user_id\":";
     const end = "}";
@@ -38,9 +37,8 @@ class ProfileAdminModel extends ChangeNotifier {
     listProfile.forEach((element) {
       if (element.user_id == int.parse(Id)) id = element.id!;
     });
-
-    listMyEvent = await api.getMyEvent(token!);
     final Profile = await api.getConcretProfile(id);
+    listMyEvent = await api.getMyEvent(token!);
     path = Profile.avatar_path;
     Name = Profile.first_name;
     Surname = Profile.last_name;

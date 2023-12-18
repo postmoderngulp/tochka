@@ -31,7 +31,7 @@ class _mainSreenCompanyState extends State<mainSreenCommon> {
     return Scaffold(
       body: _tabs[widget.selectIndex],
       bottomNavigationBar: SizedBox(
-        height: 58.h,
+        height: 65.h,
         child: BottomNavigationBar(
           unselectedLabelStyle: const TextStyle(color: Colors.grey),
           backgroundColor: Colors.white,

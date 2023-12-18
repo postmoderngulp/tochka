@@ -3,14 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../style/styles/text_style.dart';
 
-class notificationAdmin extends StatefulWidget {
-  const notificationAdmin({super.key});
+class notificationOrganizer extends StatefulWidget {
+  const notificationOrganizer({super.key});
 
   @override
-  State<notificationAdmin> createState() => _NotificationState();
+  State<notificationOrganizer> createState() => _NotificationState();
 }
 
-class _NotificationState extends State<notificationAdmin> {
+class _NotificationState extends State<notificationOrganizer> {
   @override
   Widget build(BuildContext context) {
     return const SafeArea(

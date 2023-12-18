@@ -1,11 +1,12 @@
 import 'package:Tochka_Sbora/Domain/Api/api.dart';
+import 'package:Tochka_Sbora/Navigation/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-class moreInfoEventAdminModel extends ChangeNotifier {
+class moreInfoEventOrganizerModel extends ChangeNotifier {
   String isSubscribe = "";
 
-  moreInfoEventAdminModel() {
+  moreInfoEventOrganizerModel() {
     _setup();
   }
 
@@ -13,6 +14,10 @@ class moreInfoEventAdminModel extends ChangeNotifier {
     const storage = FlutterSecureStorage();
     isSubscribe = (await storage.read(key: isSubscribe))!;
     notifyListeners();
+  }
+
+  void goToMembers(BuildContext context) {
+    Navigator.of(context).pushNamed(NavigationRoutes.MembersAdmin);
   }
 
   void subScribe(int id) async {

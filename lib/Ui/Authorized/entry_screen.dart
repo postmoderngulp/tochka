@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:Tochka_Sbora/style/styles/colors.dart';
-import '../../Domain/Models/authModel/entry_model.dart';
+import '../../Domain/Models/authModel/entry_bloc.dart';
 import '../../style/styles/button_style.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../style/styles/text_style.dart';
 
 class EntryScreen extends StatelessWidget {
@@ -16,7 +18,7 @@ class EntryScreen extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: Provider(
-          create: (context) => EntryModel(), child: const subEntryScreen()),
+          create: (context) => EntryBloc(), child: const subEntryScreen()),
     ));
   }
 }
@@ -26,89 +28,158 @@ class subEntryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = context.read<EntryModel>();
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 37.w),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 230.h),
-          Text(
-            "Вход",
-            style: TextStylee.title_text,
-          ),
-          SizedBox(
-            height: 50.h,
-          ),
-          Center(
-            child: SizedBox(
-              width: 300.w,
-              height: 45.h,
-              child: TextFormField(
-                onChanged: (value) => model.nickName = value,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: colors.TextColor, width: 1),
-                      borderRadius: BorderRadius.circular(10.0)),
-                  hintText: "E-mail",
-                  hintStyle: TextStylee.second_text,
+    final bloc = context.read<EntryBloc>();
+    return StreamBuilder<EntryState>(
+        stream: bloc.stream,
+        initialData: bloc.state,
+        builder: (context, snapshot) {
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 37.w),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 75.h),
+                Center(
+                  child: SvgPicture.asset(
+                    "assets/image/logo.svg",
+                    width: 55.5.w,
+                    height: 55.5.h,
+                  ),
                 ),
-              ),
-            ),
-          ),
-          SizedBox(height: 20.h),
-          Center(
-            child: SizedBox(
-              width: 300.w,
-              height: 45.h,
-              child: TextFormField(
-                onChanged: (value) => model.password = value,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: colors.TextColor, width: 1),
-                      borderRadius: BorderRadius.circular(10.0)),
-                  hintText: "Пароль",
-                  hintStyle: TextStylee.second_text,
+                SizedBox(height: 20.h),
+                Center(
+                  child: SvgPicture.asset(
+                    "assets/image/logo_text.svg",
+                    width: 176.w,
+                    height: 23.h,
+                  ),
                 ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 40.h,
-          ),
-          Center(
-            child: SizedBox(
-              width: 197.w,
-              height: 46.h,
-              child: ElevatedButton(
-                onPressed: () =>
-                    model.goEnter(model.nickName, model.password, context),
-                style: Buttonstyle.main_button_style,
-                child: Text(
-                  "Войти",
-                  style: TextStylee.myDateWhite_text,
+                SizedBox(height: 62.h),
+                Text(
+                  "Вход",
+                  style: TextStylee.title_text,
                 ),
-              ),
+                SizedBox(
+                  height: 22.h,
+                ),
+                Center(
+                  child: SizedBox(
+                    width: 300.w,
+                    height: 45.h,
+                    child: CupertinoTextField(
+                      prefix: Padding(
+                        padding: EdgeInsets.only(
+                            left: 15.w, top: 12.h, bottom: 12.h),
+                        child: SvgPicture.asset(
+                          "assets/image/Message.svg",
+                          width: 22.w,
+                          height: 22.h,
+                        ),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                          vertical: 15.h, horizontal: 14.w),
+                      autofocus: true,
+                      keyboardType: TextInputType.emailAddress,
+                      onEditingComplete: () =>
+                          FocusScope.of(context).nextFocus(),
+                      onChanged: (value) =>
+                          bloc.dispatch(NicknameEvents(name: value)),
+                      placeholder: "Электронная почта",
+                      placeholderStyle: TextStylee.second_text,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        color: Colors.white,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20.h),
+                Center(
+                  child: SizedBox(
+                    width: 300.w,
+                    height: 45.h,
+                    child: CupertinoTextField(
+                      prefix: Padding(
+                        padding: EdgeInsets.only(
+                            left: 15.w, top: 12.h, bottom: 12.h),
+                        child: SvgPicture.asset(
+                          "assets/image/Lock.svg",
+                          width: 22.w,
+                          height: 22.h,
+                        ),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                          vertical: 15.h, horizontal: 14.w),
+                      autofocus: true,
+                      keyboardType: TextInputType.emailAddress,
+                      onEditingComplete: () =>
+                          FocusScope.of(context).nextFocus(),
+                      onChanged: (value) =>
+                          bloc.dispatch(PasswordEvents(password: value)),
+                      placeholder: "Пароль",
+                      placeholderStyle: TextStylee.second_text,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        color: Colors.white,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 23.5.h,
+                ),
+                GestureDetector(
+                  onTap: () =>
+                      bloc.dispatch(GoToRecoveryEvents(context: context)),
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      "Забыли пароль?",
+                      style: TextStylee.second_text,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 45.h,
+                ),
+                Center(
+                  child: SizedBox(
+                    width: 271.w,
+                    height: 58.h,
+                    child: ElevatedButton(
+                      onPressed: () => bloc.dispatch(SignInEvents(
+                          name: snapshot.requireData.nickName,
+                          password: snapshot.requireData.password,
+                          context: context)),
+                      style: Buttonstyle.main_button_style,
+                      child: Text(
+                        "Войти",
+                        style: TextStylee.myDateWhite_text,
+                      ),
+                    ),
+                  ),
+                ),
+                const Spacer(),
+                Center(
+                  child: TextButton(
+                      onPressed: () =>
+                          bloc.dispatch(GoToRegistrEvents(context: context)),
+                      child: Text(
+                        "Еще нет аккаунта? Зарегистрироваться ",
+                        style: TextStylee.second_text,
+                      )),
+                ),
+                SizedBox(
+                  height: 43.h,
+                )
+              ],
             ),
-          ),
-          Expanded(
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: TextButton(
-                  onPressed: () => model.goToRegistr(context),
-                  child: Text(
-                    "Еще нет аккаунта? Зарегистрироваться ",
-                    style: TextStylee.second_text,
-                  )),
-            ),
-          )
-        ],
-      ),
-    );
+          );
+        });
   }
 }

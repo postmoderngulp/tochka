@@ -28,7 +28,7 @@ class SignUpUser2Model extends ChangeNotifier {
     List<int> listId = [];
     listId.add(Val);
     api.patchConcretProfile(listId, Id, token!);
-    goToEntry(context);
+    goToAddPhoto(context);
   }
 
   void createUser(
@@ -41,6 +41,7 @@ class SignUpUser2Model extends ChangeNotifier {
       String sex,
       String password,
       BuildContext context) async {
+    goToAddPhoto(context);
     final api = Api();
     final id = await api.createUser(username, password);
     final profile = await api.createProfile(
@@ -49,11 +50,11 @@ class SignUpUser2Model extends ChangeNotifier {
     await storage.write(key: "id", value: profile.user_id.toString());
     await storage.write(
         key: "isOrganizer", value: profile.is_organizer.toString());
-    goToEntry(context);
+    goToAddPhoto(context);
   }
 
-  void goToEntry(BuildContext context) {
-    Navigator.of(context).pushNamed(NavigationRoutes.EntryScreen);
+  void goToAddPhoto(BuildContext context) {
+    Navigator.of(context).pushNamed(NavigationRoutes.ChooseRegistrUser3Paths);
   }
 
   void goToConfirm(BuildContext context) {

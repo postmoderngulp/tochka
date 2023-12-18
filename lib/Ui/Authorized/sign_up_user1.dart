@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:Tochka_Sbora/style/styles/colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import '../../Domain/Models/authModel/sign_up_user1_model.dart';
 import '../../style/styles/button_style.dart';
 import '../../style/styles/text_style.dart';
@@ -30,12 +31,49 @@ class subSignUpUser1 extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w),
       child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: 70.h,
+                height: 30.h,
+              ),
+              const backButton(),
+              SizedBox(
+                height: 25.h,
+              ),
+              Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset(
+                      "assets/image/first_progress.svg",
+                      width: 94.w,
+                      height: 3.h,
+                    ),
+                    SizedBox(
+                      width: 24.w,
+                    ),
+                    SvgPicture.asset(
+                      "assets/image/neutral_progress.svg",
+                      width: 94.w,
+                      height: 3.h,
+                    ),
+                    SizedBox(
+                      width: 24.w,
+                    ),
+                    SvgPicture.asset(
+                      "assets/image/neutral_progress.svg",
+                      width: 94.w,
+                      height: 3.h,
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 50.h,
               ),
               Text(
                 "Привет!",
@@ -100,6 +138,17 @@ class subSignUpUser1 extends StatelessWidget {
             ]),
       ),
     );
+  }
+}
+
+class backButton extends StatelessWidget {
+  const backButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+        onTap: () => Navigator.of(context).pop(),
+        child: SvgPicture.asset("assets/image/backButton.svg"));
   }
 }
 
@@ -304,7 +353,7 @@ class continueButton extends StatelessWidget {
     final model = context.watch<SignUpUser1Model>();
     return Center(
       child: SizedBox(
-        width: 175.w,
+        width: 300.w,
         height: 46.h,
         child: ElevatedButton(
           onPressed: () => model.goToSignUpUser2(
@@ -318,10 +367,10 @@ class continueButton extends StatelessWidget {
             model.sex,
             model.password,
           ),
-          style: Buttonstyle.baseMain_button_style,
+          style: Buttonstyle.main_button_style,
           child: Text(
             "Продолжить",
-            style: TextStylee.main_text,
+            style: TextStylee.myDateWhite_text,
           ),
         ),
       ),

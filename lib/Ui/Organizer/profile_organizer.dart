@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:Tochka_Sbora/Domain/Models/adminModel/profile_admin_model.dart';
+import 'package:Tochka_Sbora/Domain/Models/organizerModel/profile_organizer_model.dart';
 import 'package:Tochka_Sbora/style/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,13 +8,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import '../../style/styles/text_style.dart';
 
-class ProfileAdminScreen extends StatelessWidget {
-  const ProfileAdminScreen({super.key});
+class ProfileOrganizerScreen extends StatelessWidget {
+  const ProfileOrganizerScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (BuildContext context) => ProfileAdminModel(),
+      create: (BuildContext context) => ProfileOrganizerModel(),
       child: const subProfileAdminScreen(),
     );
   }
@@ -48,7 +48,7 @@ class _subProfileScreenState extends State<subProfileAdminScreen>
 
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<ProfileAdminModel>();
+    final model = context.watch<ProfileOrganizerModel>();
     return SafeArea(
       child: Scaffold(
         floatingActionButton: const createEventButton(),
@@ -168,7 +168,7 @@ class createEventButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<ProfileAdminModel>();
+    final model = context.watch<ProfileOrganizerModel>();
     return FloatingActionButton(
       onPressed: () => model.goToCreateEvent(context),
       backgroundColor: colors.MainColor,
@@ -200,7 +200,7 @@ class GroupBannerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<ProfileAdminModel>();
+    final model = context.watch<ProfileOrganizerModel>();
     return Container(
       width: 325.w,
       height: 76.h,
@@ -280,7 +280,7 @@ class GroupBannerItem extends StatelessWidget {
 class GroupEvent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<ProfileAdminModel>();
+    final model = context.watch<ProfileOrganizerModel>();
     return ListView.builder(
         shrinkWrap: true,
         physics: const ClampingScrollPhysics(),
@@ -299,7 +299,7 @@ class GroupEventItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<ProfileAdminModel>();
+    final model = context.watch<ProfileOrganizerModel>();
     String title = utf8.decode(model.listMyEvent[index].title.runes.toList());
     String time =
         utf8.decode(model.listMyEvent[index].datetime_event.runes.toList());

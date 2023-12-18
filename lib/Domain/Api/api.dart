@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:Tochka_Sbora/Domain/Entity/event.dart';
 import 'package:Tochka_Sbora/Domain/Entity/interest.dart';
 import 'package:Tochka_Sbora/Domain/Entity/profile.dart';

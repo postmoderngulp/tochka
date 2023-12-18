@@ -1,4 +1,4 @@
-import 'package:Tochka_Sbora/Domain/Models/adminModel/create_event_model.dart';
+import 'package:Tochka_Sbora/Domain/Models/organizerModel/create_event_model.dart';
 import 'package:Tochka_Sbora/style/styles/button_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +28,7 @@ class subCreateEvent extends StatelessWidget {
         child: Scaffold(
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,

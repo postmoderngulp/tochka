@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:Tochka_Sbora/Domain/Entity/event.dart';
-import 'package:Tochka_Sbora/Domain/Models/adminModel/more_info_event_model.dart';
+import 'package:Tochka_Sbora/Domain/Models/organizerModel/more_info_event_model.dart';
 import 'package:Tochka_Sbora/style/styles/button_style.dart';
 import 'package:Tochka_Sbora/style/styles/text_style.dart';
 import 'package:flutter/material.dart';
@@ -9,13 +9,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
-class moreInfoEventAdmin extends StatelessWidget {
-  const moreInfoEventAdmin({super.key});
+class moreInfoEventOrganizer extends StatelessWidget {
+  const moreInfoEventOrganizer({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => moreInfoEventAdminModel(),
+      create: (context) => moreInfoEventOrganizerModel(),
       child: const subMoreinfoEvent(),
     );
   }
@@ -26,6 +26,7 @@ class subMoreinfoEvent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<moreInfoEventOrganizerModel>();
     final Event = ModalRoute.of(context)!.settings.arguments as event;
     String title = utf8.decode(Event.title.runes.toList());
     String time = utf8.decode(Event.title.runes.toList());
@@ -112,6 +113,32 @@ class subMoreinfoEvent extends StatelessWidget {
                     style: TextStylee.Subsecond_text,
                   )
                 ]),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 17.h,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 29.w),
+            child: Row(
+              children: [
+                SvgPicture.asset("assets/image/members.svg"),
+                SizedBox(
+                  width: 7.w,
+                ),
+                Text(
+                  "105 участников",
+                  style: TextStylee.Subsecond_text,
+                ),
+                const Spacer(),
+                GestureDetector(
+                  onTap: () => bloc.goToMembers(context),
+                  child: Text(
+                    "Посмотреть все",
+                    style: TextStylee.subSubTitletext,
+                  ),
+                ),
               ],
             ),
           ),
@@ -219,7 +246,7 @@ class joinButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<moreInfoEventAdminModel>();
+    final model = context.watch<moreInfoEventOrganizerModel>();
     return Padding(
       padding: EdgeInsets.only(bottom: 38.h),
       child: Center(
@@ -227,12 +254,10 @@ class joinButton extends StatelessWidget {
           width: 252.w,
           height: 46.h,
           child: ElevatedButton(
-            onPressed: () => model.isSubscribe == "true"
-                ? model.unSubScribe(id)
-                : model.subScribe(id),
+            onPressed: () {},
             style: Buttonstyle.main_button_style,
             child: Text(
-              model.isSubscribe == "true" ? "Отписаться" : "Присоединиться",
+              "Редактировать",
               style: TextStylee.myDateWhite_text,
             ),
           ),

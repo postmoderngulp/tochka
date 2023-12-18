@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:Tochka_Sbora/Domain/Entity/event.dart';
-import 'package:Tochka_Sbora/Domain/Models/commonModel/moreInfoUserModel.dart';
+import 'package:Tochka_Sbora/Domain/Models/commonModel/moreInfoUserBloc.dart';
 import 'package:Tochka_Sbora/style/styles/button_style.dart';
+import 'package:Tochka_Sbora/style/styles/colors.dart';
 import 'package:Tochka_Sbora/style/styles/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,8 +15,8 @@ class moreInfoEventUser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => moreInfoEventUserModel(),
+    return Provider(
+      create: (context) => MoreInfoScreenBloc(),
       child: const subMoreinfoEvent(),
     );
   }
@@ -34,6 +35,7 @@ class subMoreinfoEvent extends StatelessWidget {
     return SafeArea(
         child: Scaffold(
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -189,13 +191,48 @@ class subMoreinfoEvent extends StatelessWidget {
             SizedBox(
               height: 101.h,
             ),
-            joinButton(
-              id: Event.id,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 29.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const shareButton(),
+                  joinButton(
+                    id: Event.id,
+                  ),
+                ],
+              ),
             ),
           ],
         ),
       ),
     ));
+  }
+}
+
+class shareButton extends StatelessWidget {
+  const shareButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        width: 46.w,
+        height: 46.h,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: colors.MainColor,
+        ),
+        child: Center(
+            child: SvgPicture.asset(
+          "assets/image/share.svg",
+          width: 17.2,
+          height: 21.h,
+        )),
+      ),
+    );
   }
 }
 
@@ -220,24 +257,27 @@ class joinButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<moreInfoEventUserModel>();
-    return Padding(
-      padding: EdgeInsets.only(bottom: 38.h),
-      child: Center(
-        child: SizedBox(
-          width: 252.w,
-          height: 46.h,
-          child: ElevatedButton(
-            onPressed: () =>
-                model.isSubscribe ? model.unSubScribe(id) : model.subScribe(id),
-            style: Buttonstyle.main_button_style,
-            child: Text(
-              model.isSubscribe ? "Отписаться" : "Присоединиться",
-              style: TextStylee.myDateWhite_text,
+    final bloc = context.read<MoreInfoScreenBloc>();
+    return StreamBuilder<MoreInfoScreenState>(
+        stream: bloc.stream,
+        initialData: bloc.state,
+        builder: (context, snapshot) {
+          return SizedBox(
+            width: 252.w,
+            height: 46.h,
+            child: ElevatedButton(
+              onPressed: () => snapshot.requireData.isSubscribe
+                  ? bloc.disPatch(UnSubscribeEvent(id: id))
+                  : bloc.disPatch(SubscribeEvent(id: id)),
+              style: Buttonstyle.main_button_style,
+              child: Text(
+                snapshot.requireData.isSubscribe
+                    ? "Отписаться"
+                    : "Присоединиться",
+                style: TextStylee.myDateWhite_text,
+              ),
             ),
-          ),
-        ),
-      ),
-    );
+          );
+        });
   }
 }

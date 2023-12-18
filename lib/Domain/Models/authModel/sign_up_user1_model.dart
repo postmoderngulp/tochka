@@ -1,7 +1,5 @@
-import 'package:Tochka_Sbora/Domain/Api/api.dart';
 import 'package:Tochka_Sbora/Domain/Entity/test.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../../../Navigation/navigation.dart';
 
 class SignUpUser1Model {

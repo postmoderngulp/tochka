@@ -4,6 +4,7 @@ import 'package:Tochka_Sbora/Domain/Entity/test.dart';
 import 'package:Tochka_Sbora/style/styles/button_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import '../../Domain/Models/authModel/sign_up_user2_model.dart';
 import '../../style/styles/text_style.dart';
@@ -33,6 +34,7 @@ class subSignUpUser2 extends StatelessWidget {
     final args = ModalRoute.of(context)!.settings.arguments as test;
     final dropValue = ValueNotifier('');
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w),
         child: Column(
@@ -40,7 +42,43 @@ class subSignUpUser2 extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: 77.h,
+              height: 50.h,
+            ),
+            const backButton(),
+            SizedBox(
+              height: 25.h,
+            ),
+            Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    "assets/image/first_progress.svg",
+                    width: 94.w,
+                    height: 3.h,
+                  ),
+                  SizedBox(
+                    width: 24.w,
+                  ),
+                  SvgPicture.asset(
+                    "assets/image/first_progress.svg",
+                    width: 94.w,
+                    height: 3.h,
+                  ),
+                  SizedBox(
+                    width: 24.w,
+                  ),
+                  SvgPicture.asset(
+                    "assets/image/neutral_progress.svg",
+                    width: 94.w,
+                    height: 3.h,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 50.h,
             ),
             Text(
               "Выбери свои",
@@ -127,8 +165,8 @@ class subSignUpUser2 extends StatelessWidget {
                       height: 80.h,
                     ),
                     SizedBox(
-                      width: 160.w,
-                      height: 45.h,
+                      width: 300.w,
+                      height: 46.h,
                       child: ElevatedButton(
                         onPressed: () => model.createUser(
                             args.firstName,
@@ -140,10 +178,10 @@ class subSignUpUser2 extends StatelessWidget {
                             args.sex,
                             args.password,
                             context),
-                        style: Buttonstyle.baseMain_button_style,
+                        style: Buttonstyle.main_button_style,
                         child: Text(
-                          "Завершить",
-                          style: TextStylee.main_text,
+                          "Продолжить",
+                          style: TextStylee.myDateWhite_text,
                         ),
                       ),
                     ),
@@ -152,21 +190,23 @@ class subSignUpUser2 extends StatelessWidget {
                 SizedBox(
                   height: 22.h,
                 ),
-                Center(
-                  child: TextButton(
-                    onPressed: () => model.goToEntry(context),
-                    child: Text(
-                      "Пропустить",
-                      style: TextStylee.second_text,
-                    ),
-                  ),
-                ),
               ],
             ),
           ],
         ),
       ),
     );
+  }
+}
+
+class backButton extends StatelessWidget {
+  const backButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+        onTap: () => Navigator.of(context).pop(),
+        child: SvgPicture.asset("assets/image/backButton.svg"));
   }
 }
 
