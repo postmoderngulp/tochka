@@ -111,7 +111,6 @@ class EntryBloc {
     } else if (event is PasswordEvents) {
       yield EntryState(nickName: _state.nickName, password: event.password);
     } else if (event is SignInEvents) {
-      Navigator.of(event.context).pushNamed(NavigationRoutes.MainScreenAdmin);
       final api = Api();
       final token = await api.getToken(event.name, event.password);
       const storage = FlutterSecureStorage();

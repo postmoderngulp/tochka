@@ -26,7 +26,8 @@ class subCreateEvent extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
@@ -213,19 +214,19 @@ class chooseCategory extends StatelessWidget {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide:
-                          const BorderSide(color: Colors.grey, width: 0)),
+                          const BorderSide(color: Colors.grey, width: 1)),
                   errorBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide:
-                          const BorderSide(color: Colors.grey, width: 0)),
+                          const BorderSide(color: Colors.grey, width: 1)),
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide:
-                          const BorderSide(color: Colors.grey, width: 0)),
+                          const BorderSide(color: Colors.grey, width: 1)),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide:
-                          const BorderSide(color: Colors.grey, width: 0)),
+                          const BorderSide(color: Colors.grey, width: 1)),
                 ),
                 isExpanded: true,
                 hint: Text(
@@ -356,9 +357,9 @@ class backButton extends StatelessWidget {
     return GestureDetector(
         onTap: () => Navigator.of(context).pop(),
         child: SvgPicture.asset(
-          "assets/image/back.svg",
-          width: 10.w,
-          height: 17.h,
+          "assets/image/arrow-left.svg",
+          width: 22.w,
+          height: 22.h,
         ));
   }
 }

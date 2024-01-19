@@ -26,6 +26,7 @@ class subMembers extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Padding(
@@ -37,7 +38,7 @@ class subMembers extends StatelessWidget {
               SizedBox(
                 height: 20.h,
               ),
-              backButton(),
+              const backButton(),
               Center(
                   child: Text(
                 "Участники",
@@ -63,9 +64,9 @@ class backButton extends StatelessWidget {
     return GestureDetector(
         onTap: () => Navigator.of(context).pop(),
         child: SvgPicture.asset(
-          "assets/image/back.svg",
-          width: 10.w,
-          height: 17.h,
+          "assets/image/arrow-left.svg",
+          width: 22.w,
+          height: 22.h,
         ));
   }
 }

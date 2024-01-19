@@ -1,12 +1,26 @@
 import 'dart:convert';
-
 import 'package:Tochka_Sbora/Domain/Api/api.dart';
 import 'package:Tochka_Sbora/Domain/Entity/event.dart';
+import 'package:Tochka_Sbora/Domain/demoEntity/interesting.dart';
 import 'package:Tochka_Sbora/Navigation/navigation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class ProfileOrganizerModel extends ChangeNotifier {
+  List<Interesting> listInteresting = [
+    Interesting(
+        picture: Image.asset('assets/image/book.png'),
+        label: 'Изучение языков'),
+    Interesting(
+        picture: Image.asset('assets/image/cook.png'), label: 'Кулинария'),
+    Interesting(
+        picture: Image.asset('assets/image/business.png'), label: 'Бизнес'),
+    Interesting(picture: Image.asset('assets/image/sport.png'), label: 'Спорт'),
+    Interesting(
+        picture: Image.asset('assets/image/programming.png'),
+        label: 'Программирование'),
+  ];
+
   bool isDone = false;
   List<event> listMyEvent = [];
   String path = "";

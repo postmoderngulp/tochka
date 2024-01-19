@@ -5,7 +5,21 @@ import 'package:flutter/material.dart';
 
 class mainScreenOrganizerModel extends ChangeNotifier {
   bool isDone = false;
-  List<event> listEvent = [];
+  List<event> listEvent = [
+    event(
+        id: 1,
+        title: 'бег',
+        description: 'бегать',
+        is_open: true,
+        max_num_participants: 12,
+        datetime_event: '2024-12-12',
+        datetime_creation: '2024-11-12',
+        organizer_id: 12,
+        rate: 1,
+        address: 'адресс',
+        interests: [],
+        participants: [])
+  ];
 
   void setDone() {
     isDone = !isDone;

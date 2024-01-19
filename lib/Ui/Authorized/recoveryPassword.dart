@@ -26,6 +26,7 @@ class subRecoveryPassword extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+      backgroundColor: Colors.white,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
         child: Column(
@@ -72,7 +73,11 @@ class backButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () => Navigator.of(context).pop(),
-        child: SvgPicture.asset("assets/image/backButton.svg"));
+        child: SvgPicture.asset(
+          "assets/image/arrow-left.svg",
+          width: 22.w,
+          height: 22.h,
+        ));
   }
 }
 

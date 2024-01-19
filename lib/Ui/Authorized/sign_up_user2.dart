@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:Tochka_Sbora/Domain/Entity/interest.dart';
 import 'package:Tochka_Sbora/Domain/Entity/test.dart';
 import 'package:Tochka_Sbora/style/styles/button_style.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +60,7 @@ class subSignUpUser2 extends StatelessWidget {
                     height: 3.h,
                   ),
                   SizedBox(
-                    width: 24.w,
+                    width: 12.w,
                   ),
                   SvgPicture.asset(
                     "assets/image/first_progress.svg",
@@ -67,7 +68,7 @@ class subSignUpUser2 extends StatelessWidget {
                     height: 3.h,
                   ),
                   SizedBox(
-                    width: 24.w,
+                    width: 12.w,
                   ),
                   SvgPicture.asset(
                     "assets/image/neutral_progress.svg",
@@ -112,23 +113,23 @@ class subSignUpUser2 extends StatelessWidget {
                               filled: true,
                               contentPadding: const EdgeInsets.symmetric(
                                   horizontal: 10.0, vertical: 15.0),
-                              fillColor: Colors.transparent,
+                              fillColor: Colors.white,
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: const BorderSide(
-                                      color: Colors.transparent, width: 0)),
+                                      color: Colors.grey, width: 1)),
                               errorBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: const BorderSide(
-                                      color: Colors.transparent, width: 0)),
+                                      color: Colors.grey, width: 1)),
                               enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: const BorderSide(
-                                      color: Colors.transparent, width: 0)),
+                                      color: Colors.grey, width: 1)),
                               focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: const BorderSide(
-                                      color: Colors.transparent, width: 0)),
+                                      color: Colors.grey, width: 1)),
                             ),
                             isExpanded: true,
                             hint: Text(
@@ -143,8 +144,8 @@ class subSignUpUser2 extends StatelessWidget {
                             items: model.listHobby
                                 .map((e) => DropdownMenuItem(
                                       value: e,
-                                      child: Text(
-                                          utf8.decode(e.name.runes.toList())),
+                                      child:
+                                          Text(utf8.decode(e.runes.toList())),
                                     ))
                                 .toList(),
                           );
@@ -206,7 +207,11 @@ class backButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () => Navigator.of(context).pop(),
-        child: SvgPicture.asset("assets/image/backButton.svg"));
+        child: SvgPicture.asset(
+          "assets/image/arrow-left.svg",
+          width: 22.w,
+          height: 22.h,
+        ));
   }
 }
 
@@ -217,7 +222,7 @@ class item extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = context.watch<SignUpUser2Model>();
-    String title = utf8.decode(model.listHobby[index].name.runes.toList());
+    String title = utf8.decode(model.listHobby[index].runes.toList());
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 9.w, vertical: 5.h),
       child: SizedBox(

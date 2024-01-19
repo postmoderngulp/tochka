@@ -4,6 +4,7 @@ import 'package:Tochka_Sbora/Ui/Organizer/profile_organizer.dart';
 import 'package:Tochka_Sbora/style/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 class mainSreenOrganizer extends StatefulWidget {
   int selectIndex = 0;
@@ -29,39 +30,56 @@ class _mainSreenCompanyState extends State<mainSreenOrganizer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: _tabs[widget.selectIndex],
       bottomNavigationBar: SizedBox(
         height: 58.h,
-        child: BottomNavigationBar(
-          unselectedLabelStyle: const TextStyle(color: Colors.grey),
-          backgroundColor: Colors.white,
-          onTap: tapBar,
-          currentIndex: widget.selectIndex,
-          selectedItemColor: colors.MainColor,
-          unselectedItemColor: Colors.grey,
-          selectedLabelStyle: TextStyle(color: colors.MainColor),
-          items: [
-            BottomNavigationBarItem(
-              icon: ImageIcon(
-                const AssetImage('assets/image/home.png'),
-                size: 20.w,
-              ),
-              label: 'Главная',
-            ),
-            BottomNavigationBarItem(
-                icon: ImageIcon(
-                  const AssetImage('assets/image/notification.png'),
-                  size: 20.w,
+        child: Theme(
+          data: ThemeData(
+            splashFactory: NoSplash.splashFactory,
+            highlightColor: Colors.transparent,
+          ),
+          child: BottomNavigationBar(
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            unselectedLabelStyle: const TextStyle(color: Colors.grey),
+            backgroundColor: Colors.white,
+            onTap: tapBar,
+            currentIndex: widget.selectIndex,
+            selectedItemColor: colors.MainColor,
+            unselectedItemColor: Colors.grey,
+            selectedLabelStyle: TextStyle(color: colors.MainColor),
+            items: [
+              BottomNavigationBarItem(
+                icon: SvgPicture.asset(
+                  'assets/image/icon_home.svg',
+                  colorFilter: ColorFilter.mode(
+                      widget.selectIndex == 0 ? colors.MainColor : Colors.grey,
+                      BlendMode.srcIn),
                 ),
-                label: 'Уведомления'),
-            BottomNavigationBarItem(
-              icon: ImageIcon(
-                const AssetImage('assets/image/profile.png'),
-                size: 20.w,
+                label: 'Главная',
               ),
-              label: 'Профиль',
-            ),
-          ],
+              BottomNavigationBarItem(
+                  icon: SvgPicture.asset(
+                    'assets/image/icon_bell.svg',
+                    colorFilter: ColorFilter.mode(
+                        widget.selectIndex == 1
+                            ? colors.MainColor
+                            : Colors.grey,
+                        BlendMode.srcIn),
+                  ),
+                  label: 'Уведомления'),
+              BottomNavigationBarItem(
+                icon: SvgPicture.asset(
+                  'assets/image/icon_user.svg',
+                  colorFilter: ColorFilter.mode(
+                      widget.selectIndex == 2 ? colors.MainColor : Colors.grey,
+                      BlendMode.srcIn),
+                ),
+                label: 'Профиль',
+              ),
+            ],
+          ),
         ),
       ),
     );

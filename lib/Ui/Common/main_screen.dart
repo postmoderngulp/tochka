@@ -174,10 +174,16 @@ class BannerItem extends StatelessWidget {
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.4),
+                  color: Colors.grey.shade200,
                   spreadRadius: 1,
-                  blurRadius: 3, // changes position of shadow
+                  blurRadius: 15,
+                  offset: const Offset(5, 5),
                 ),
+                BoxShadow(
+                    color: Colors.grey.shade100,
+                    offset: const Offset(5, 5),
+                    blurRadius: 15,
+                    spreadRadius: 1),
               ],
               color: Colors.white,
               borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -305,17 +311,26 @@ class GroupBannerItem extends StatelessWidget {
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.4),
+                  color: Colors.grey.shade200,
                   spreadRadius: 1,
-                  blurRadius: 3, // changes position of shadow
+                  blurRadius: 15,
+                  offset: const Offset(5, 5),
                 ),
+                BoxShadow(
+                    color: Colors.grey.shade100,
+                    offset: const Offset(5, 5),
+                    blurRadius: 15,
+                    spreadRadius: 1),
               ],
               borderRadius: const BorderRadius.all(Radius.circular(9)),
             ),
             child: Row(
               children: [
+                SizedBox(
+                  width: 17.w,
+                ),
                 Padding(
-                  padding: EdgeInsets.only(left: 17.w, top: 13.h, bottom: 13.h),
+                  padding: EdgeInsets.symmetric(vertical: 13.h),
                   child: Container(
                     width: 45.w,
                     height: 45.h,
@@ -338,14 +353,14 @@ class GroupBannerItem extends StatelessWidget {
                     children: [
                       Text(
                         "Любительские фотосъемки",
-                        style: TextStylee.main_text,
+                        style: TextStylee.titleGroup,
                       ),
                       SizedBox(
                         height: 4.h,
                       ),
                       Text(
                         "13 участников",
-                        style: TextStylee.second_text,
+                        style: TextStylee.subTitleGroup,
                       ),
                     ],
                   ),

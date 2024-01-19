@@ -1,11 +1,14 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:Tochka_Sbora/Domain/Models/organizerModel/profile_organizer_model.dart';
-import 'package:Tochka_Sbora/style/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+
+import 'package:Tochka_Sbora/Domain/Models/organizerModel/profile_organizer_model.dart';
+import 'package:Tochka_Sbora/style/styles/colors.dart';
+
 import '../../style/styles/text_style.dart';
 
 class ProfileOrganizerScreen extends StatelessWidget {
@@ -54,6 +57,7 @@ class _subProfileScreenState extends State<subProfileAdminScreen>
         floatingActionButton: const createEventButton(),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -70,17 +74,16 @@ class _subProfileScreenState extends State<subProfileAdminScreen>
               ),
               Center(
                 child: Container(
-                  width: 117.w,
-                  height: 117.h,
+                  width: 116.9.w,
+                  height: 116.9.h,
                   decoration: BoxDecoration(
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(100)),
+                      shape: BoxShape.circle,
                       image: DecorationImage(
                           image: NetworkImage(model.path), fit: BoxFit.cover)),
                 ),
               ),
               SizedBox(
-                height: 25.h,
+                height: 13.19.h,
               ),
               Center(
                 child: Text(
@@ -89,7 +92,7 @@ class _subProfileScreenState extends State<subProfileAdminScreen>
                 ),
               ),
               SizedBox(
-                height: 10.h,
+                height: 6.43.h,
               ),
               Center(
                 child: Text(
@@ -105,17 +108,26 @@ class _subProfileScreenState extends State<subProfileAdminScreen>
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Wrap(
-                      children: List.generate(
-                          5,
-                          (index) => Padding(
-                                padding: EdgeInsets.only(left: 2.w),
-                                child: SvgPicture.asset(
-                                  "assets/image/star.svg",
-                                  width: 20.w,
-                                  height: 20.h,
-                                ),
-                              )),
+                    SizedBox(
+                      width: 105.w,
+                    ),
+                    const Column(
+                      children: [
+                        Text('350'),
+                        Text('Подписок'),
+                      ],
+                    ),
+                    const Spacer(),
+                    SvgPicture.asset('assets/image/divider.svg'),
+                    const Spacer(),
+                    const Column(
+                      children: [
+                        Text('346'),
+                        Text('Подписчиков'),
+                      ],
+                    ),
+                    SizedBox(
+                      width: 92.w,
                     )
                   ],
                 ),
@@ -124,7 +136,10 @@ class _subProfileScreenState extends State<subProfileAdminScreen>
                 height: 32.h,
               ),
               TabBar(
+                  splashFactory: NoSplash.splashFactory,
+                  labelColor: Colors.white,
                   controller: _tabController,
+                  indicatorSize: TabBarIndicatorSize.tab,
                   unselectedLabelStyle: TextStylee.second_text,
                   unselectedLabelColor: Colors.grey,
                   indicator: BoxDecoration(
@@ -133,13 +148,13 @@ class _subProfileScreenState extends State<subProfileAdminScreen>
                           const BorderRadius.all(Radius.circular(10))),
                   tabs: const [
                     Tab(
+                      text: "Обо мне",
+                    ),
+                    Tab(
                       text: "Группы",
                     ),
                     Tab(
                       text: "Мероприятия",
-                    ),
-                    Tab(
-                      text: "Избранное",
                     ),
                   ]),
               SizedBox(
@@ -147,17 +162,117 @@ class _subProfileScreenState extends State<subProfileAdminScreen>
                 child: TabBarView(
                   controller: _tabController,
                   children: <Widget>[
+                    const AboutMe(),
                     GroupBanner(),
                     GroupEvent(),
-                    const Center(
-                      child: Text("It's sunny here"),
-                    ),
                   ],
                 ),
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class AboutMe extends StatelessWidget {
+  const AboutMe({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final model = context.watch<ProfileOrganizerModel>();
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 26.w),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 39.h,
+            ),
+            Text('Обо мне'),
+            SizedBox(
+              height: 17.h,
+            ),
+            SizedBox(
+                width: 323.w,
+                child: Text(
+                    'Я нахожу вдохновение в природе, взаимодействии с людьми и исследовании различных культур. Мое творчество – это способ передать свои мысли и чувства через изобразительное искусство.')),
+            SizedBox(
+              height: 36.h,
+            ),
+            Text('Интересы'),
+            SizedBox(
+              height: 14.h,
+            ),
+            Wrap(
+              children: List.generate(
+                  model.listInteresting.length,
+                  (index) => Padding(
+                        padding: EdgeInsets.only(right: 10.w, bottom: 6.h),
+                        child: interestingItem(
+                          index: index,
+                        ),
+                      )),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class interestingItem extends StatelessWidget {
+  int index;
+  interestingItem({
+    Key? key,
+    required this.index,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final model = context.watch<ProfileOrganizerModel>();
+    return Container(
+      height: 26.h,
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.shade200,
+            spreadRadius: 1,
+            blurRadius: 15,
+            offset: const Offset(5, 5),
+          ),
+          BoxShadow(
+              color: Colors.grey.shade100,
+              offset: const Offset(5, 5),
+              blurRadius: 15,
+              spreadRadius: 1),
+        ],
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: 10.w,
+          ),
+          model.listInteresting[index].picture,
+          SizedBox(
+            width: 5.w,
+          ),
+          Text(
+            model.listInteresting[index].label,
+          ),
+          SizedBox(
+            width: 10.w,
+          ),
+        ],
       ),
     );
   }
@@ -170,6 +285,8 @@ class createEventButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = context.watch<ProfileOrganizerModel>();
     return FloatingActionButton(
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(100))),
       onPressed: () => model.goToCreateEvent(context),
       backgroundColor: colors.MainColor,
       child: const Icon(
@@ -185,7 +302,7 @@ class GroupBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
         shrinkWrap: true,
-        physics: const ClampingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
         itemCount: 10,
         itemBuilder: (context, index) => Padding(
@@ -208,25 +325,33 @@ class GroupBannerItem extends StatelessWidget {
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.4),
+            color: Colors.grey.shade200,
             spreadRadius: 1,
-            blurRadius: 3, // changes position of shadow
+            blurRadius: 15,
+            offset: const Offset(5, 5),
           ),
+          BoxShadow(
+              color: Colors.grey.shade100,
+              offset: const Offset(5, 5),
+              blurRadius: 15,
+              spreadRadius: 1),
         ],
         borderRadius: const BorderRadius.all(Radius.circular(9)),
       ),
       child: Row(
         children: [
+          SizedBox(
+            width: 17.w,
+          ),
           Padding(
-            padding: EdgeInsets.only(left: 17.w, top: 13.h, bottom: 13.h),
+            padding: EdgeInsets.symmetric(vertical: 13.h),
             child: Container(
               width: 45.w,
               height: 45.h,
               decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(6)),
                   image: DecorationImage(
-                      image: NetworkImage(
-                          "https://s3-alpha-sig.figma.com/img/1ef3/7e2f/daab14210224e0e2d86ed0c053441833?Expires=1701648000&Signature=HX9SID0F6Fpy~TL1~sMIsCH2jXeALW3dNtNCG947TwTQfFC1rPmZxg5p5JD5gDBkRaBecUo4yXE5Lx~308BVss0XW8EiZHsf7-verUaKCCS6qKG0ZtjASsQVJk7w12k~r-tsxqTJhMGpgWbtPER9Bu0b4~5fmRwU-PtJSZy1J74GIz2umaDd-YPuVX7AEGK0q9UJJsTPCdZW-dFdSQKc15HyHobJxPY3jfhj3zecS4G1UqiuVeSDU19~-gmRPGaQcIXNe5LHreOS46INc~2hkC5VSu5d2J1d3Z2YnTa2d3YqvnLv~Ywj3Dy4BJSpF~JlfpaMEu8BfmWhBvohapPkPw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"),
+                      image: AssetImage("assets/image/NoAvatarBanner.png"),
                       fit: BoxFit.cover)),
             ),
           ),
@@ -241,14 +366,14 @@ class GroupBannerItem extends StatelessWidget {
               children: [
                 Text(
                   "Любительские фотосъемки",
-                  style: TextStylee.main_text,
+                  style: TextStylee.titleGroup,
                 ),
                 SizedBox(
                   height: 4.h,
                 ),
                 Text(
                   "13 участников",
-                  style: TextStylee.second_text,
+                  style: TextStylee.subTitleGroup,
                 ),
               ],
             ),
@@ -283,7 +408,7 @@ class GroupEvent extends StatelessWidget {
     final model = context.watch<ProfileOrganizerModel>();
     return ListView.builder(
         shrinkWrap: true,
-        physics: const ClampingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
         itemCount: model.listMyEvent.length,
         itemBuilder: (context, index) => Padding(
@@ -312,10 +437,16 @@ class GroupEventItem extends StatelessWidget {
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.4),
+            color: Colors.grey.shade200,
             spreadRadius: 1,
-            blurRadius: 3, // changes position of shadow
+            blurRadius: 15,
+            offset: const Offset(5, 5),
           ),
+          BoxShadow(
+              color: Colors.grey.shade100,
+              offset: const Offset(5, 5),
+              blurRadius: 15,
+              spreadRadius: 1),
         ],
         borderRadius: const BorderRadius.all(Radius.circular(9)),
       ),
@@ -345,7 +476,7 @@ class GroupEventItem extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: TextStylee.main_text,
+                  style: TextStylee.titleGroup,
                 ),
                 SizedBox(
                   height: 4.h,
@@ -368,7 +499,7 @@ class GroupEventItem extends StatelessWidget {
                           ),
                           Text(
                             time,
-                            style: TextStylee.Subsecond_text,
+                            style: TextStylee.subTitleGroup,
                           )
                         ]),
                     SizedBox(
@@ -385,7 +516,7 @@ class GroupEventItem extends StatelessWidget {
                       ),
                       Text(
                         address,
-                        style: TextStylee.Subsecond_text,
+                        style: TextStylee.subTitleGroup,
                       )
                     ]),
                   ],

@@ -31,4 +31,28 @@ class interest {
 
   factory interest.fromJson(String source) =>
       interest.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  int get hashCode => id.hashCode ^ name.hashCode ^ created_by.hashCode;
+
+  @override
+  bool operator ==(covariant interest other) {
+    if (identical(this, other)) return true;
+
+    return other.id == id &&
+        other.name == name &&
+        other.created_by == created_by;
+  }
+
+  interest copyWith({
+    int? id,
+    String? name,
+    int? created_by,
+  }) {
+    return interest(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      created_by: created_by ?? this.created_by,
+    );
+  }
 }

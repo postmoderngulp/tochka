@@ -26,6 +26,7 @@ class subSignUpUser3 extends StatelessWidget {
     final model = context.watch<SignUpUser3Model>();
     return SafeArea(
         child: Scaffold(
+      backgroundColor: Colors.white,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
         child: Column(
@@ -50,7 +51,7 @@ class subSignUpUser3 extends StatelessWidget {
                     height: 3.h,
                   ),
                   SizedBox(
-                    width: 24.w,
+                    width: 12.w,
                   ),
                   SvgPicture.asset(
                     "assets/image/first_progress.svg",
@@ -58,7 +59,7 @@ class subSignUpUser3 extends StatelessWidget {
                     height: 3.h,
                   ),
                   SizedBox(
-                    width: 24.w,
+                    width: 12.w,
                   ),
                   SvgPicture.asset(
                     "assets/image/neutral_progress.svg",
@@ -129,6 +130,10 @@ class backButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () => Navigator.of(context).pop(),
-        child: SvgPicture.asset("assets/image/backButton.svg"));
+        child: SvgPicture.asset(
+          "assets/image/arrow-left.svg",
+          width: 22.w,
+          height: 22.h,
+        ));
   }
 }

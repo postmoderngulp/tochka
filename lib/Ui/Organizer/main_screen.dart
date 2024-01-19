@@ -119,8 +119,8 @@ class searchField extends StatelessWidget {
             onTap: () => showModalBottomSheet<dynamic>(
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(24),
-                      topRight: Radius.circular(24))),
+                      topLeft: Radius.circular(38),
+                      topRight: Radius.circular(38))),
               isScrollControlled: true,
               context: context,
               builder: (BuildContext context) {
@@ -160,71 +160,81 @@ class FilterBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        SizedBox(
-          height: 32.h,
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w),
-          child: Text(
-            "Фильтр",
-            style: TextStylee.subAlert_title_text,
+    return Container(
+      decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(38), topRight: Radius.circular(38))),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            height: 12.h,
           ),
-        ),
-        SizedBox(
-          height: 30.h,
-        ),
-        const listInterest(),
-        SizedBox(
-          height: 27.h,
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w),
-          child: Text(
-            "Время и дата",
-            style: TextStylee.subAlert_title_text,
+          Center(child: SvgPicture.asset('assets/image/top_panel.svg')),
+          SizedBox(
+            height: 15.h,
           ),
-        ),
-        SizedBox(
-          height: 12.h,
-        ),
-        Padding(
-          padding: EdgeInsets.only(left: 20.w),
-          child: const listTimes(),
-        ),
-        SizedBox(
-          height: 10.h,
-        ),
-        Padding(
-          padding: EdgeInsets.only(left: 25.w),
-          child: const timePicker(),
-        ),
-        SizedBox(
-          height: 26.h,
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w),
-          child: Text(
-            "Местоположение",
-            style: TextStylee.subAlert_title_text,
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: Text(
+              "Фильтр",
+              style: TextStylee.subAlert_title_text,
+            ),
           ),
-        ),
-        SizedBox(
-          height: 12.h,
-        ),
-        const chooseLocation(),
-        SizedBox(
-          height: 180.h,
-        ),
-        const ActionGroupButton(),
-        SizedBox(
-          height: 21.h,
-        ),
-      ],
+          SizedBox(
+            height: 30.h,
+          ),
+          const listInterest(),
+          SizedBox(
+            height: 27.h,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: Text(
+              "Время и дата",
+              style: TextStylee.subAlert_title_text,
+            ),
+          ),
+          SizedBox(
+            height: 12.h,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 20.w),
+            child: const listTimes(),
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 25.w),
+            child: const timePicker(),
+          ),
+          SizedBox(
+            height: 26.h,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: Text(
+              "Местоположение",
+              style: TextStylee.subAlert_title_text,
+            ),
+          ),
+          SizedBox(
+            height: 12.h,
+          ),
+          const chooseLocation(),
+          SizedBox(
+            height: 180.h,
+          ),
+          const ActionGroupButton(),
+          SizedBox(
+            height: 21.h,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -338,6 +348,20 @@ class _timePickerState extends State<timePicker> {
 
   Future<void> _pickDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
+        builder: (BuildContext context, Widget? child) {
+          return Theme(
+            data: ThemeData(
+              colorScheme: ColorScheme.light(
+                primary: colors.AccentColor, // header background color
+                onPrimary: Colors.white, // header text color
+                onSurface: Colors.black,
+              ),
+              primaryColor: colors.MainColor,
+              dialogBackgroundColor: Colors.white,
+            ),
+            child: child!,
+          );
+        },
         context: context,
         initialDate: _selectDate,
         firstDate: DateTime.now(),
@@ -351,6 +375,44 @@ class _timePickerState extends State<timePicker> {
 
   @override
   Widget build(BuildContext context) {
+    String month = '';
+    switch (_selectDate.month) {
+      case 1:
+        month = 'Января';
+        break;
+      case 2:
+        month = 'Февраля';
+        break;
+      case 3:
+        month = 'Марта';
+        break;
+      case 4:
+        month = 'Апреля';
+        break;
+      case 5:
+        month = 'Мая';
+        break;
+      case 6:
+        month = 'Июня';
+        break;
+      case 7:
+        month = 'Июля';
+        break;
+      case 8:
+        month = 'Августа';
+        break;
+      case 9:
+        month = 'Сентября';
+        break;
+      case 10:
+        month = 'Октября';
+        break;
+      case 11:
+        month = 'Ноября';
+        break;
+      case 12:
+        month = 'Декабря';
+    }
     return SizedBox(
         width: 241.w,
         height: 42.h,
@@ -374,7 +436,7 @@ class _timePickerState extends State<timePicker> {
                 width: 9.w,
               ),
               Text(
-                "${_selectDate.day.toString()} ${_selectDate.month.toString()}",
+                "${_selectDate.day.toString()} $month",
                 style: TextStylee.second_text,
               ),
             ],
@@ -437,7 +499,7 @@ class listInterest extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = context.watch<FilterModel>();
     return SizedBox(
-      height: 90.h,
+      height: 117.h,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
@@ -457,6 +519,9 @@ class InterestsItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        SizedBox(
+          height: 2.h,
+        ),
         Container(
           width: 63.w,
           height: 63.h,
@@ -478,7 +543,7 @@ class InterestsItem extends StatelessWidget {
         ),
         Text(
           "Еда",
-          style: TextStylee.second_text,
+          style: TextStylee.titleRegularGroup,
         ),
       ],
     );
@@ -527,10 +592,16 @@ class BannerItem extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.4),
+            color: Colors.grey.shade200,
             spreadRadius: 1,
-            blurRadius: 3, // changes position of shadow
+            blurRadius: 15,
+            offset: const Offset(5, 5),
           ),
+          BoxShadow(
+              color: Colors.grey.shade100,
+              offset: const Offset(5, 5),
+              blurRadius: 15,
+              spreadRadius: 1),
         ],
         color: Colors.white,
         borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -548,7 +619,7 @@ class BannerItem extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(11)),
                     image: DecorationImage(
                         image: NetworkImage(
-                            "https://www.google.com/url?sa=i&url=https%3A%2F%2Fthegirl.ru%2Farticles%2Ftop-10-luchshikh-anime-dlya-tekh-kto-ne-lyubit-anime%2F&psig=AOvVaw0RxE59brKdE8N_fxLkePFe&ust=1701941763472000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLDypaTB-oIDFQAAAAAdAAAAABAF"),
+                            "https://s3-alpha-sig.figma.com/img/cf8d/3fa4/f6d794fff88e926131fb33ec72ab3380?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=fB9vqt45kICF-lkwVNUmhXyj92tow9G3jX79rVrmO4-ysYXArixZIuF0o~T6p2fpHp5dPhGTdEtuEJI8NJlxMCSL~mTrkAuqJlX4j3erQtWVEW-IpRgsVbfq~YPOuVhvS3exNeU9LRFgfxpsdmQKafjYNfh47TQ7PqgwdmyWfGFEsxbXH9lZpLlU0rjkWPGJZuo0C7vkoWMwBIEeJjwtc7dUyOF-9XsIREK302Ri3oNIPe9BXo6gxJkB8amidsu5lWQ7bG-c4egOdErK1N-wgxPXRaYZ1DCTlySqVcHuIiLO1jcGrjCGVjKXV93ul~~5QBWMyIJgxmVG0dusDrccSw__"),
                         fit: BoxFit.cover)),
                 child: Align(
                   alignment: Alignment.topRight,
@@ -647,25 +718,34 @@ class GroupBannerItem extends StatelessWidget {
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.4),
+            blurStyle: BlurStyle.normal,
+            color: Colors.grey.shade200,
             spreadRadius: 1,
-            blurRadius: 3, // changes position of shadow
+            blurRadius: 15,
+            offset: const Offset(5, 5),
           ),
+          BoxShadow(
+              color: Colors.grey.shade100,
+              offset: const Offset(5, 5),
+              blurRadius: 15,
+              spreadRadius: 1),
         ],
         borderRadius: const BorderRadius.all(Radius.circular(9)),
       ),
       child: Row(
         children: [
+          SizedBox(
+            width: 17.w,
+          ),
           Padding(
-            padding: EdgeInsets.only(left: 17.w, top: 13.h, bottom: 13.h),
+            padding: EdgeInsets.symmetric(vertical: 13.h),
             child: Container(
               width: 45.w,
               height: 45.h,
               decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(6)),
                   image: DecorationImage(
-                      image: NetworkImage(
-                          "https://s3-alpha-sig.figma.com/img/1ef3/7e2f/daab14210224e0e2d86ed0c053441833?Expires=1701648000&Signature=HX9SID0F6Fpy~TL1~sMIsCH2jXeALW3dNtNCG947TwTQfFC1rPmZxg5p5JD5gDBkRaBecUo4yXE5Lx~308BVss0XW8EiZHsf7-verUaKCCS6qKG0ZtjASsQVJk7w12k~r-tsxqTJhMGpgWbtPER9Bu0b4~5fmRwU-PtJSZy1J74GIz2umaDd-YPuVX7AEGK0q9UJJsTPCdZW-dFdSQKc15HyHobJxPY3jfhj3zecS4G1UqiuVeSDU19~-gmRPGaQcIXNe5LHreOS46INc~2hkC5VSu5d2J1d3Z2YnTa2d3YqvnLv~Ywj3Dy4BJSpF~JlfpaMEu8BfmWhBvohapPkPw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"),
+                      image: AssetImage("assets/image/NoAvatarBanner.png"),
                       fit: BoxFit.cover)),
             ),
           ),
@@ -680,14 +760,14 @@ class GroupBannerItem extends StatelessWidget {
               children: [
                 Text(
                   "Любительские фотосъемки",
-                  style: TextStylee.main_text,
+                  style: TextStylee.titleGroup,
                 ),
                 SizedBox(
                   height: 4.h,
                 ),
                 Text(
                   "13 участников",
-                  style: TextStylee.second_text,
+                  style: TextStylee.subTitleGroup,
                 ),
               ],
             ),

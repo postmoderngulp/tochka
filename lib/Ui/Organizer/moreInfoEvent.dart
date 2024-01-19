@@ -28,12 +28,13 @@ class subMoreinfoEvent extends StatelessWidget {
   Widget build(BuildContext context) {
     final bloc = context.read<moreInfoEventOrganizerModel>();
     final Event = ModalRoute.of(context)!.settings.arguments as event;
-    String title = utf8.decode(Event.title.runes.toList());
-    String time = utf8.decode(Event.title.runes.toList());
-    String address = utf8.decode(Event.title.runes.toList());
-    String description = utf8.decode(Event.description.runes.toList());
+    // String title = utf8.decode(Event.title.runes.toList());
+    // String time = utf8.decode(Event.title.runes.toList());
+    // String address = utf8.decode(Event.title.runes.toList());
+    // String description = utf8.decode(Event.description.runes.toList());
     return SafeArea(
         child: Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,7 +60,7 @@ class subMoreinfoEvent extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(11)),
                       image: DecorationImage(
                           image: NetworkImage(
-                              "https://s3-alpha-sig.figma.com/img/cf8d/3fa4/f6d794fff88e926131fb33ec72ab3380?Expires=1701648000&Signature=PWO~~Zzi7k-V5fXdPHbR7tAC0nCfro53TChNQJeXU8wu4zkC6ncdlQdjLZ326xt6Vfc-DNa7SZwOJ2-HJnIm8MVU1ge7gA-xZJ-wLH~vVg4ttWUtbZW6vUzAyPnB00L~yIlR8v6x6zdm~CnaT-IcsP8nu7Vi-rUfsJoCgO2thd6TN~KluAnS1XdYV6BWecJTqKro4LgTb0FmsAfvXt0ph6jFMNk91wBIiFdN1jnJffC5Tc9eoQPa~gqNqixDn4Jrdtep1GY1ybYIrmfdFyF3JDZ1BUfSaClzmPm0dmG9LB5~2xz6NpyM6Un04DS1clXuAv~cVf6-VKzKm-fLaMNMSg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"),
+                              "https://s3-alpha-sig.figma.com/img/cf8d/3fa4/f6d794fff88e926131fb33ec72ab3380?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=fB9vqt45kICF-lkwVNUmhXyj92tow9G3jX79rVrmO4-ysYXArixZIuF0o~T6p2fpHp5dPhGTdEtuEJI8NJlxMCSL~mTrkAuqJlX4j3erQtWVEW-IpRgsVbfq~YPOuVhvS3exNeU9LRFgfxpsdmQKafjYNfh47TQ7PqgwdmyWfGFEsxbXH9lZpLlU0rjkWPGJZuo0C7vkoWMwBIEeJjwtc7dUyOF-9XsIREK302Ri3oNIPe9BXo6gxJkB8amidsu5lWQ7bG-c4egOdErK1N-wgxPXRaYZ1DCTlySqVcHuIiLO1jcGrjCGVjKXV93ul~~5QBWMyIJgxmVG0dusDrccSw__"),
                           fit: BoxFit.cover)),
                 ),
                 SizedBox(
@@ -68,7 +69,7 @@ class subMoreinfoEvent extends StatelessWidget {
                 SizedBox(
                   width: 219.w,
                   child: Text(
-                    title,
+                    Event.title,
                     style: TextStylee.title_text,
                   ),
                 ),
@@ -92,7 +93,7 @@ class subMoreinfoEvent extends StatelessWidget {
                     width: 3.w,
                   ),
                   Text(
-                    time,
+                    Event.datetime_event,
                     style: TextStylee.Subsecond_text,
                   )
                 ]),
@@ -109,7 +110,7 @@ class subMoreinfoEvent extends StatelessWidget {
                     width: 3.w,
                   ),
                   Text(
-                    address,
+                    Event.address,
                     style: TextStylee.Subsecond_text,
                   )
                 ]),
@@ -153,7 +154,7 @@ class subMoreinfoEvent extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(27)),
                   image: DecorationImage(
                       image: NetworkImage(
-                          "https://s3-alpha-sig.figma.com/img/cf8d/3fa4/f6d794fff88e926131fb33ec72ab3380?Expires=1701648000&Signature=PWO~~Zzi7k-V5fXdPHbR7tAC0nCfro53TChNQJeXU8wu4zkC6ncdlQdjLZ326xt6Vfc-DNa7SZwOJ2-HJnIm8MVU1ge7gA-xZJ-wLH~vVg4ttWUtbZW6vUzAyPnB00L~yIlR8v6x6zdm~CnaT-IcsP8nu7Vi-rUfsJoCgO2thd6TN~KluAnS1XdYV6BWecJTqKro4LgTb0FmsAfvXt0ph6jFMNk91wBIiFdN1jnJffC5Tc9eoQPa~gqNqixDn4Jrdtep1GY1ybYIrmfdFyF3JDZ1BUfSaClzmPm0dmG9LB5~2xz6NpyM6Un04DS1clXuAv~cVf6-VKzKm-fLaMNMSg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"),
+                          "https://s3-alpha-sig.figma.com/img/cf8d/3fa4/f6d794fff88e926131fb33ec72ab3380?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=fB9vqt45kICF-lkwVNUmhXyj92tow9G3jX79rVrmO4-ysYXArixZIuF0o~T6p2fpHp5dPhGTdEtuEJI8NJlxMCSL~mTrkAuqJlX4j3erQtWVEW-IpRgsVbfq~YPOuVhvS3exNeU9LRFgfxpsdmQKafjYNfh47TQ7PqgwdmyWfGFEsxbXH9lZpLlU0rjkWPGJZuo0C7vkoWMwBIEeJjwtc7dUyOF-9XsIREK302Ri3oNIPe9BXo6gxJkB8amidsu5lWQ7bG-c4egOdErK1N-wgxPXRaYZ1DCTlySqVcHuIiLO1jcGrjCGVjKXV93ul~~5QBWMyIJgxmVG0dusDrccSw__"),
                       fit: BoxFit.cover)),
               child: Column(
                 children: [
@@ -209,7 +210,7 @@ class subMoreinfoEvent extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 29.w),
             child: Text(
-              description,
+              Event.description,
               style: TextStylee.second_text,
             ),
           ),
@@ -233,9 +234,9 @@ class backButton extends StatelessWidget {
     return GestureDetector(
         onTap: () => Navigator.of(context).pop(),
         child: SvgPicture.asset(
-          "assets/image/back.svg",
-          width: 10.w,
-          height: 17.h,
+          "assets/image/arrow-left.svg",
+          width: 22.w,
+          height: 22.h,
         ));
   }
 }

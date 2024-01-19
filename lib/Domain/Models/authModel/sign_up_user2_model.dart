@@ -6,7 +6,7 @@ import '../../../Navigation/navigation.dart';
 
 class SignUpUser2Model extends ChangeNotifier {
   int val = -1;
-  List<interest> listHobby = [];
+  List<String> listHobby = [];
   List<int> listMyInterest = [];
 
   SignUpUser2Model() {
@@ -15,7 +15,10 @@ class SignUpUser2Model extends ChangeNotifier {
 
   void _getInteres() async {
     final api = Api();
-    listHobby = await api.getAllInterests();
+    final hobbies = await api.getAllInterests();
+    for (int i = 0; i < hobbies.length; i++) {
+      listHobby.add(hobbies[i].name);
+    }
     notifyListeners();
   }
 

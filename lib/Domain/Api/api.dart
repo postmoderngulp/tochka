@@ -95,29 +95,14 @@ class Api {
     return profile.fromJson(response.body);
   }
 
-  void putConcretProfile(
-      String firstName,
-      String lastName,
-      String email,
-      String about,
-      String dob,
-      String path,
-      String sex,
-      int id,
-      String token) async {
+  void putAvatarProfile(String path, int id, String token) async {
     final headers = {
       'Content-Type': 'application/json',
       'Authorization': "Bearer $token"
     };
     final body = {
       "user_id": id,
-      "first_name": firstName,
-      "last_name": lastName,
-      "email": email,
-      "about": about,
-      "birthday": dob,
       "avatar_path": path,
-      "sex": sex
     };
     var endPoint = Uri.parse('$host/api/v1/users_profile/$id/');
     final response =

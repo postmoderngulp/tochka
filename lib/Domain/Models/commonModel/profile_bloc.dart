@@ -2,14 +2,21 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'package:Tochka_Sbora/Domain/Api/api.dart';
 import 'package:Tochka_Sbora/Domain/Entity/event.dart';
+import 'package:Tochka_Sbora/Domain/demoEntity/interesting.dart';
 
 class ProfileState {
+  String aboutMe;
+  List<Interesting> listInteresting = [
+    Interesting(
+        picture: Image.asset('assets/image/programming.png'),
+        label: 'Программирование'),
+  ];
   bool isDone;
   List<event> listMyEvent;
   String path;
@@ -17,6 +24,8 @@ class ProfileState {
   String surname;
   String email;
   ProfileState({
+    required this.aboutMe,
+    required this.listInteresting,
     required this.isDone,
     required this.listMyEvent,
     required this.path,
@@ -25,7 +34,35 @@ class ProfileState {
     required this.email,
   });
 
+  @override
+  bool operator ==(covariant ProfileState other) {
+    if (identical(this, other)) return true;
+
+    return other.aboutMe == aboutMe &&
+        listEquals(other.listInteresting, listInteresting) &&
+        other.isDone == isDone &&
+        listEquals(other.listMyEvent, listMyEvent) &&
+        other.path == path &&
+        other.name == name &&
+        other.surname == surname &&
+        other.email == email;
+  }
+
+  @override
+  int get hashCode {
+    return aboutMe.hashCode ^
+        listInteresting.hashCode ^
+        isDone.hashCode ^
+        listMyEvent.hashCode ^
+        path.hashCode ^
+        name.hashCode ^
+        surname.hashCode ^
+        email.hashCode;
+  }
+
   ProfileState copyWith({
+    String? aboutMe,
+    List<Interesting>? listInteresting,
     bool? isDone,
     List<event>? listMyEvent,
     String? path,
@@ -34,6 +71,8 @@ class ProfileState {
     String? email,
   }) {
     return ProfileState(
+      aboutMe: aboutMe ?? this.aboutMe,
+      listInteresting: listInteresting ?? this.listInteresting,
       isDone: isDone ?? this.isDone,
       listMyEvent: listMyEvent ?? this.listMyEvent,
       path: path ?? this.path,
@@ -44,25 +83,8 @@ class ProfileState {
   }
 
   @override
-  bool operator ==(covariant ProfileState other) {
-    if (identical(this, other)) return true;
-
-    return other.isDone == isDone &&
-        listEquals(other.listMyEvent, listMyEvent) &&
-        other.path == path &&
-        other.name == name &&
-        other.surname == surname &&
-        other.email == email;
-  }
-
-  @override
-  int get hashCode {
-    return isDone.hashCode ^
-        listMyEvent.hashCode ^
-        path.hashCode ^
-        name.hashCode ^
-        surname.hashCode ^
-        email.hashCode;
+  String toString() {
+    return 'ProfileState(aboutMe: $aboutMe, listInteresting: $listInteresting, isDone: $isDone, listMyEvent: $listMyEvent, path: $path, name: $name, surname: $surname, email: $email)';
   }
 }
 
@@ -102,12 +124,18 @@ class SetEmailEvents implements ProfileEvents {
 
 class profileBloc {
   ProfileState _state = ProfileState(
+      aboutMe: '',
       isDone: false,
       listMyEvent: [],
       path: "",
       name: "",
       surname: "",
-      email: "");
+      email: "",
+      listInteresting: [
+        Interesting(
+            picture: Image.asset('assets/image/programming.png'),
+            label: 'Программирование'),
+      ]);
 
   final _eventController = StreamController<ProfileEvents>.broadcast();
   late final Stream<ProfileState> _stream;
@@ -142,7 +170,9 @@ class profileBloc {
           path: _state.path,
           name: _state.name,
           surname: _state.surname,
-          email: _state.email);
+          email: _state.email,
+          aboutMe: _state.aboutMe,
+          listInteresting: _state.listInteresting);
     } else if (event is GetEvents) {
       final api = Api();
       const storage = FlutterSecureStorage();
@@ -172,7 +202,13 @@ class profileBloc {
           path: Profile.avatar_path,
           name: Profile.first_name,
           surname: Profile.last_name,
-          email: Profile.email);
+          email: Profile.email,
+          listInteresting: [
+            Interesting(
+                picture: Image.asset('assets/image/programming.png'),
+                label: 'Программирование'),
+          ],
+          aboutMe: _state.aboutMe);
     } else if (event is SetEmailEvents) {
     } else if (event is SetNameEvents) {
     } else if (event is SetPathEvents) {

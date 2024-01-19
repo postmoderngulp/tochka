@@ -9,7 +9,21 @@ import 'package:Tochka_Sbora/Navigation/Navigation.dart';
 
 class MainScreenState {
   bool isDone;
-  List<event> listEvent;
+  List<event> listEvent = [
+    event(
+        id: 1,
+        title: 'бег',
+        description: 'бегать',
+        is_open: true,
+        max_num_participants: 12,
+        datetime_event: '2024-12-12',
+        datetime_creation: '2024-11-12',
+        organizer_id: 12,
+        rate: 1,
+        address: 'address',
+        interests: [],
+        participants: [])
+  ];
 
   MainScreenState({
     required this.isDone,

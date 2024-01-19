@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:Tochka_Sbora/style/styles/colors.dart';
 import '../../Domain/Models/authModel/entry_bloc.dart';
 import '../../style/styles/button_style.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -47,7 +46,7 @@ class subEntryScreen extends StatelessWidget {
                     height: 55.5.h,
                   ),
                 ),
-                SizedBox(height: 20.h),
+                SizedBox(height: 20.5.h),
                 Center(
                   child: SvgPicture.asset(
                     "assets/image/logo_text.svg",
@@ -55,7 +54,7 @@ class subEntryScreen extends StatelessWidget {
                     height: 23.h,
                   ),
                 ),
-                SizedBox(height: 62.h),
+                SizedBox(height: 62.04.h),
                 Text(
                   "Вход",
                   style: TextStylee.title_text,
@@ -65,8 +64,8 @@ class subEntryScreen extends StatelessWidget {
                 ),
                 Center(
                   child: SizedBox(
-                    width: 300.w,
-                    height: 45.h,
+                    width: 313.w,
+                    height: 55.h,
                     child: CupertinoTextField(
                       prefix: Padding(
                         padding: EdgeInsets.only(
@@ -86,7 +85,7 @@ class subEntryScreen extends StatelessWidget {
                       onChanged: (value) =>
                           bloc.dispatch(NicknameEvents(name: value)),
                       placeholder: "Электронная почта",
-                      placeholderStyle: TextStylee.second_text,
+                      placeholderStyle: TextStylee.fieldStyle,
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey),
                         color: Colors.white,
@@ -96,11 +95,11 @@ class subEntryScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 20.h),
+                SizedBox(height: 19.5.h),
                 Center(
                   child: SizedBox(
-                    width: 300.w,
-                    height: 45.h,
+                    width: 313.w,
+                    height: 55.h,
                     child: CupertinoTextField(
                       prefix: Padding(
                         padding: EdgeInsets.only(
@@ -115,12 +114,13 @@ class subEntryScreen extends StatelessWidget {
                           vertical: 15.h, horizontal: 14.w),
                       autofocus: true,
                       keyboardType: TextInputType.emailAddress,
+                      obscureText: true,
                       onEditingComplete: () =>
                           FocusScope.of(context).nextFocus(),
                       onChanged: (value) =>
                           bloc.dispatch(PasswordEvents(password: value)),
                       placeholder: "Пароль",
-                      placeholderStyle: TextStylee.second_text,
+                      placeholderStyle: TextStylee.fieldStyle,
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey),
                         color: Colors.white,
@@ -140,7 +140,7 @@ class subEntryScreen extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: Text(
                       "Забыли пароль?",
-                      style: TextStylee.second_text,
+                      style: TextStylee.littleStyle,
                     ),
                   ),
                 ),
@@ -159,7 +159,7 @@ class subEntryScreen extends StatelessWidget {
                       style: Buttonstyle.main_button_style,
                       child: Text(
                         "Войти",
-                        style: TextStylee.myDateWhite_text,
+                        style: TextStylee.buttonTxtStyle,
                       ),
                     ),
                   ),
@@ -169,9 +169,20 @@ class subEntryScreen extends StatelessWidget {
                   child: TextButton(
                       onPressed: () =>
                           bloc.dispatch(GoToRegistrEvents(context: context)),
-                      child: Text(
-                        "Еще нет аккаунта? Зарегистрироваться ",
-                        style: TextStylee.second_text,
+                      child: GestureDetector(
+                        onTap: () =>
+                            bloc.dispatch(GoToRegistrEvents(context: context)),
+                        child: RichText(
+                            text: TextSpan(
+                                text: 'Еще нет аккаунта?',
+                                style: TextStylee.littleBlackTxt,
+                                children: [
+                              const TextSpan(text: '  '),
+                              TextSpan(
+                                text: 'Зарегистрироваться',
+                                style: TextStylee.littleMainTxt,
+                              ),
+                            ])),
                       )),
                 ),
                 SizedBox(

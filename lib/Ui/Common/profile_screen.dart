@@ -131,7 +131,10 @@ class _subProfileScreenState extends State<subProfileScreen>
                   height: 32.h,
                 ),
                 TabBar(
+                    splashFactory: NoSplash.splashFactory,
+                    labelColor: Colors.white,
                     controller: _tabController,
+                    indicatorSize: TabBarIndicatorSize.tab,
                     unselectedLabelStyle: TextStylee.second_text,
                     unselectedLabelColor: Colors.grey,
                     indicator: BoxDecoration(
@@ -140,13 +143,13 @@ class _subProfileScreenState extends State<subProfileScreen>
                             const BorderRadius.all(Radius.circular(10))),
                     tabs: const [
                       Tab(
+                        text: "Обо мне",
+                      ),
+                      Tab(
                         text: "Группы",
                       ),
                       Tab(
                         text: "Мероприятия",
-                      ),
-                      Tab(
-                        text: "Избранное",
                       ),
                     ]),
                 SizedBox(
@@ -154,13 +157,126 @@ class _subProfileScreenState extends State<subProfileScreen>
                   child: TabBarView(
                     controller: _tabController,
                     children: <Widget>[
+                      const AboutMe(),
                       GroupBanner(),
                       GroupEvent(),
-                      const Center(
-                        child: Text("It's sunny here"),
-                      ),
                     ],
                   ),
+                ),
+              ],
+            ),
+          );
+        });
+  }
+}
+
+class AboutMe extends StatelessWidget {
+  const AboutMe({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final bloc = context.read<profileBloc>();
+    return StreamBuilder<ProfileState>(
+        stream: bloc.stream,
+        initialData: bloc.state,
+        builder: (context, snapshot) {
+          String aboutMe = utf8.decode(snapshot.data!.aboutMe.runes.toList());
+          return SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 26.w),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 39.h,
+                  ),
+                  Text('Обо мне'),
+                  SizedBox(
+                    height: 17.h,
+                  ),
+                  SizedBox(
+                    width: 323.w,
+                    child: Text(
+                        'Я нахожу вдохновение в природе, взаимодействии с людьми и исследовании различных культур. Мое творчество – это способ передать свои мысли и чувства через изобразительное искусство.'),
+                  ),
+                  SizedBox(
+                    height: 36.h,
+                  ),
+                  Text('Интересы'),
+                  SizedBox(
+                    height: 14.h,
+                  ),
+                  Wrap(
+                    children: List.generate(
+                        snapshot.data!.listInteresting.length,
+                        (index) => Padding(
+                              padding:
+                                  EdgeInsets.only(right: 10.w, bottom: 6.h),
+                              child: interestingItem(
+                                index: index,
+                              ),
+                            )),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+}
+
+class interestingItem extends StatelessWidget {
+  int index;
+  interestingItem({
+    Key? key,
+    required this.index,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final bloc = context.read<profileBloc>();
+    return StreamBuilder<ProfileState>(
+        stream: bloc.stream,
+        initialData: bloc.state,
+        builder: (context, snapshot) {
+          return Container(
+            height: 26.h,
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.shade200,
+                  spreadRadius: 1,
+                  blurRadius: 15,
+                  offset: const Offset(5, 5),
+                ),
+                BoxShadow(
+                    color: Colors.grey.shade100,
+                    offset: const Offset(5, 5),
+                    blurRadius: 15,
+                    spreadRadius: 1),
+              ],
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 10.w,
+                ),
+                snapshot.data!.listInteresting[index].picture,
+                SizedBox(
+                  width: 5.w,
+                ),
+                Text(
+                  snapshot.data!.listInteresting[index].label,
+                ),
+                SizedBox(
+                  width: 10.w,
                 ),
               ],
             ),
@@ -201,17 +317,26 @@ class GroupBannerItem extends StatelessWidget {
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.4),
+                  color: Colors.grey.shade200,
                   spreadRadius: 1,
-                  blurRadius: 3, // changes position of shadow
+                  blurRadius: 15,
+                  offset: const Offset(5, 5),
                 ),
+                BoxShadow(
+                    color: Colors.grey.shade100,
+                    offset: const Offset(5, 5),
+                    blurRadius: 15,
+                    spreadRadius: 1),
               ],
               borderRadius: const BorderRadius.all(Radius.circular(9)),
             ),
             child: Row(
               children: [
+                SizedBox(
+                  width: 17.w,
+                ),
                 Padding(
-                  padding: EdgeInsets.only(left: 17.w, top: 13.h, bottom: 13.h),
+                  padding: EdgeInsets.symmetric(vertical: 13.h),
                   child: Container(
                     width: 45.w,
                     height: 45.h,
@@ -234,14 +359,14 @@ class GroupBannerItem extends StatelessWidget {
                     children: [
                       Text(
                         "Любительские фотосъемки",
-                        style: TextStylee.main_text,
+                        style: TextStylee.titleGroup,
                       ),
                       SizedBox(
                         height: 4.h,
                       ),
                       Text(
                         "13 участников",
-                        style: TextStylee.second_text,
+                        style: TextStylee.subTitleGroup,
                       ),
                     ],
                   ),
@@ -311,10 +436,16 @@ class GroupEventItem extends StatelessWidget {
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.4),
+                  color: Colors.grey.shade200,
                   spreadRadius: 1,
-                  blurRadius: 3, // changes position of shadow
+                  blurRadius: 15,
+                  offset: const Offset(5, 5),
                 ),
+                BoxShadow(
+                    color: Colors.grey.shade100,
+                    offset: const Offset(5, 5),
+                    blurRadius: 15,
+                    spreadRadius: 1),
               ],
               borderRadius: const BorderRadius.all(Radius.circular(9)),
             ),
@@ -346,7 +477,7 @@ class GroupEventItem extends StatelessWidget {
                         utf8.decode(snapshot
                             .requireData.listMyEvent[index].title.runes
                             .toList()),
-                        style: TextStylee.main_text,
+                        style: TextStylee.subTitleGroup,
                       ),
                       SizedBox(
                         height: 4.h,
@@ -371,7 +502,7 @@ class GroupEventItem extends StatelessWidget {
                                   utf8.decode(snapshot.requireData
                                       .listMyEvent[index].datetime_event.runes
                                       .toList()),
-                                  style: TextStylee.Subsecond_text,
+                                  style: TextStylee.subTitleGroup,
                                 )
                               ]),
                           SizedBox(

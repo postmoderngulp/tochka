@@ -34,6 +34,7 @@ class subMoreinfoEvent extends StatelessWidget {
     String description = utf8.decode(Event.description.runes.toList());
     return SafeArea(
         child: Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
@@ -244,9 +245,9 @@ class backButton extends StatelessWidget {
     return GestureDetector(
         onTap: () => Navigator.of(context).pop(),
         child: SvgPicture.asset(
-          "assets/image/back.svg",
-          width: 10.w,
-          height: 17.h,
+          "assets/image/arrow-left.svg",
+          width: 22.w,
+          height: 22.h,
         ));
   }
 }

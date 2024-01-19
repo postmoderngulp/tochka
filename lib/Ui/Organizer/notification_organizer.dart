@@ -15,6 +15,7 @@ class _NotificationState extends State<notificationOrganizer> {
   Widget build(BuildContext context) {
     return const SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: subNotification(),
       ),
     );
