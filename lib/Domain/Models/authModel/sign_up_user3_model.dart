@@ -4,6 +4,6 @@ import 'package:flutter/material.dart';
 class SignUpUser3Model extends ChangeNotifier {
   void goToConfirmEmail(BuildContext context, String email) {
     Navigator.of(context)
-        .pushNamed(NavigationRoutes.ChooseRegistrUser4Paths, arguments: email);
+        .pushNamedAndRemoveUntil(NavigationRoutes.EntryScreen, (r) => false);
   }
 }

@@ -597,7 +597,7 @@ class _timePickerState extends State<timePicker> {
             alignment: Alignment.centerLeft,
             child: Text(
               "Дата рождения:${_selectDate.day.toString()} $month",
-              style: TextStylee.fieldStyle,
+              style: TextStylee.littleBlackTxt,
             ),
           ),
         ));
