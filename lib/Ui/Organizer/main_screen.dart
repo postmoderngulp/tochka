@@ -42,7 +42,7 @@ class MainScreenWidget extends StatelessWidget {
           ),
           const searchField(),
           SizedBox(
-            height: 50.h,
+            height: 43.h,
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -61,7 +61,7 @@ class MainScreenWidget extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 15.h,
+            height: 8.h,
           ),
           banner(),
           SizedBox(
@@ -103,10 +103,10 @@ class searchField extends StatelessWidget {
     final model = context.watch<mainScreenOrganizerModel>();
     return Center(
       child: SizedBox(
-        width: 305.w,
-        height: 40.h,
+        width: 335.w,
+        height: 42.h,
         child: CupertinoTextField(
-          padding: EdgeInsets.symmetric(horizontal: 19.w, vertical: 12.h),
+          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
           prefix: Padding(
             padding: EdgeInsets.only(left: 16.w),
             child: SvgPicture.asset(
@@ -143,9 +143,9 @@ class searchField extends StatelessWidget {
           onEditingComplete: () => FocusScope.of(context).nextFocus(),
           onChanged: (value) {},
           placeholder: "Найти событие",
-          placeholderStyle: TextStylee.second_text,
+          placeholderStyle: TextStylee.subTitleSora,
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
+            border: Border.all(color: colors.border),
             color: Colors.white,
             borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),
@@ -557,6 +557,7 @@ class banner extends StatelessWidget {
     return SizedBox(
       height: 169.h,
       child: ListView.builder(
+          physics: const BouncingScrollPhysics(),
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
           itemCount: model.listEvent.length,
@@ -587,7 +588,7 @@ class BannerItem extends StatelessWidget {
         utf8.decode(model.listEvent[index].datetime_event.runes.toList());
     String addres = utf8.decode(model.listEvent[index].address.runes.toList());
     return Container(
-      width: 167.w,
+      width: 157.w,
       height: 169.h,
       decoration: BoxDecoration(
         boxShadow: [

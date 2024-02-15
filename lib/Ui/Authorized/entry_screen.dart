@@ -1,3 +1,4 @@
+import 'package:Tochka_Sbora/style/styles/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,7 +15,7 @@ class EntryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       body: Provider(
           create: (context) => EntryBloc(), child: const subEntryScreen()),
@@ -34,161 +35,172 @@ class subEntryScreen extends StatelessWidget {
         builder: (context, snapshot) {
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: 37.w),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 75.h),
-                Center(
-                  child: SvgPicture.asset(
-                    "assets/image/logo.svg",
-                    width: 55.5.w,
-                    height: 55.5.h,
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 75.h),
+                  Center(
+                    child: SvgPicture.asset(
+                      "assets/image/logo.svg",
+                      width: 55.5.w,
+                      height: 55.5.h,
+                    ),
                   ),
-                ),
-                SizedBox(height: 20.5.h),
-                Center(
-                  child: SvgPicture.asset(
-                    "assets/image/logo_text.svg",
-                    width: 176.w,
-                    height: 23.h,
+                  SizedBox(height: 20.5.h),
+                  Center(
+                    child: SvgPicture.asset(
+                      "assets/image/logo_text.svg",
+                      width: 176.w,
+                      height: 23.h,
+                    ),
                   ),
-                ),
-                SizedBox(height: 62.04.h),
-                Text(
-                  "Вход",
-                  style: TextStylee.title_text,
-                ),
-                SizedBox(
-                  height: 22.h,
-                ),
-                Center(
-                  child: SizedBox(
-                    width: 313.w,
-                    height: 55.h,
-                    child: CupertinoTextField(
-                      prefix: Padding(
-                        padding: EdgeInsets.only(
-                            left: 15.w, top: 12.h, bottom: 12.h),
-                        child: SvgPicture.asset(
-                          "assets/image/Message.svg",
-                          width: 22.w,
-                          height: 22.h,
+                  SizedBox(height: 62.04.h),
+                  Text(
+                    "Вход",
+                    style: TextStylee.title_text,
+                  ),
+                  SizedBox(
+                    height: 22.h,
+                  ),
+                  Center(
+                    child: SizedBox(
+                      width: 313.w,
+                      height: 55.h,
+                      child: CupertinoTextField(
+                        prefix: Padding(
+                          padding: EdgeInsets.only(
+                              left: 15.w, top: 12.h, bottom: 12.h),
+                          child: SvgPicture.asset(
+                            "assets/image/Message.svg",
+                            width: 22.w,
+                            height: 22.h,
+                            colorFilter: ColorFilter.mode(
+                                colors.neutral300, BlendMode.srcIn),
+                          ),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 15.h, horizontal: 14.w),
+                        autofocus: true,
+                        keyboardType: TextInputType.emailAddress,
+                        onEditingComplete: () =>
+                            FocusScope.of(context).nextFocus(),
+                        onChanged: (value) =>
+                            bloc.dispatch(NicknameEvents(name: value)),
+                        placeholder: "Nickname",
+                        placeholderStyle: TextStylee.fieldStyle,
+                        style: TextStylee.fieldStyle,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: colors.border),
+                          color: Colors.white,
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(10)),
                         ),
                       ),
-                      padding: EdgeInsets.symmetric(
-                          vertical: 15.h, horizontal: 14.w),
-                      autofocus: true,
-                      keyboardType: TextInputType.emailAddress,
-                      onEditingComplete: () =>
-                          FocusScope.of(context).nextFocus(),
-                      onChanged: (value) =>
-                          bloc.dispatch(NicknameEvents(name: value)),
-                      placeholder: "Электронная почта",
-                      placeholderStyle: TextStylee.fieldStyle,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        color: Colors.white,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(10)),
-                      ),
                     ),
                   ),
-                ),
-                SizedBox(height: 19.5.h),
-                Center(
-                  child: SizedBox(
-                    width: 313.w,
-                    height: 55.h,
-                    child: CupertinoTextField(
-                      prefix: Padding(
-                        padding: EdgeInsets.only(
-                            left: 15.w, top: 12.h, bottom: 12.h),
-                        child: SvgPicture.asset(
-                          "assets/image/Lock.svg",
-                          width: 22.w,
-                          height: 22.h,
+                  SizedBox(height: 19.5.h),
+                  Center(
+                    child: SizedBox(
+                      width: 313.w,
+                      height: 55.h,
+                      child: CupertinoTextField(
+                        prefix: Padding(
+                          padding: EdgeInsets.only(
+                              left: 15.w, top: 12.h, bottom: 12.h),
+                          child: SvgPicture.asset(
+                            "assets/image/Lock.svg",
+                            width: 22.w,
+                            height: 22.h,
+                            colorFilter: ColorFilter.mode(
+                                colors.neutral300, BlendMode.srcIn),
+                          ),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 15.h, horizontal: 14.w),
+                        autofocus: true,
+                        keyboardType: TextInputType.emailAddress,
+                        obscureText: true,
+                        onEditingComplete: () =>
+                            FocusScope.of(context).nextFocus(),
+                        onChanged: (value) =>
+                            bloc.dispatch(PasswordEvents(password: value)),
+                        placeholder: "Пароль",
+                        placeholderStyle: TextStylee.fieldStyle,
+                        style: TextStylee.fieldStyle,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: colors.border),
+                          color: Colors.white,
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(10)),
                         ),
                       ),
-                      padding: EdgeInsets.symmetric(
-                          vertical: 15.h, horizontal: 14.w),
-                      autofocus: true,
-                      keyboardType: TextInputType.emailAddress,
-                      obscureText: true,
-                      onEditingComplete: () =>
-                          FocusScope.of(context).nextFocus(),
-                      onChanged: (value) =>
-                          bloc.dispatch(PasswordEvents(password: value)),
-                      placeholder: "Пароль",
-                      placeholderStyle: TextStylee.fieldStyle,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        color: Colors.white,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(10)),
-                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 23.5.h,
-                ),
-                GestureDetector(
-                  onTap: () =>
-                      bloc.dispatch(GoToRecoveryEvents(context: context)),
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                      "Забыли пароль?",
-                      style: TextStylee.littleStyle,
-                    ),
+                  SizedBox(
+                    height: 23.5.h,
                   ),
-                ),
-                SizedBox(
-                  height: 45.h,
-                ),
-                Center(
-                  child: SizedBox(
-                    width: 271.w,
-                    height: 58.h,
-                    child: ElevatedButton(
-                      onPressed: () => bloc.dispatch(SignInEvents(
-                          name: snapshot.requireData.nickName,
-                          password: snapshot.requireData.password,
-                          context: context)),
-                      style: Buttonstyle.main_button_style,
+                  GestureDetector(
+                    onTap: () =>
+                        bloc.dispatch(GoToRecoveryEvents(context: context)),
+                    child: Align(
+                      alignment: Alignment.centerRight,
                       child: Text(
-                        "Войти",
-                        style: TextStylee.buttonTxtStyle,
+                        "Забыли пароль?",
+                        style: TextStylee.littleStyle,
                       ),
                     ),
                   ),
-                ),
-                const Spacer(),
-                Center(
-                  child: TextButton(
-                      onPressed: () =>
-                          bloc.dispatch(GoToRegistrEvents(context: context)),
-                      child: GestureDetector(
-                        onTap: () =>
+                  SizedBox(
+                    height: 45.h,
+                  ),
+                  Center(
+                    child: SizedBox(
+                      width: 271.w,
+                      height: 58.h,
+                      child: ElevatedButton(
+                        onPressed: () => bloc.dispatch(SignInEvents(
+                            name: snapshot.requireData.nickName,
+                            password: snapshot.requireData.password,
+                            context: context)),
+                        style: Buttonstyle.main_button_style,
+                        child: Text(
+                          "Войти",
+                          style: TextStylee.buttonTxtStyle,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 142.h,
+                  ),
+                  Center(
+                    child: TextButton(
+                        onPressed: () =>
                             bloc.dispatch(GoToRegistrEvents(context: context)),
-                        child: RichText(
-                            text: TextSpan(
-                                text: 'Еще нет аккаунта?',
-                                style: TextStylee.littleBlackTxt,
-                                children: [
-                              const TextSpan(text: '  '),
-                              TextSpan(
-                                text: 'Зарегистрироваться',
-                                style: TextStylee.littleMainTxt,
-                              ),
-                            ])),
-                      )),
-                ),
-                SizedBox(
-                  height: 43.h,
-                )
-              ],
+                        child: GestureDetector(
+                          onTap: () => bloc
+                              .dispatch(GoToRegistrEvents(context: context)),
+                          child: RichText(
+                              text: TextSpan(
+                                  text: 'Нет аккаунта?',
+                                  style: TextStylee.littleBlackTxt,
+                                  children: [
+                                const TextSpan(text: '  '),
+                                TextSpan(
+                                  text: 'Зарегистрироваться',
+                                  style: TextStylee.littleMainTxt,
+                                ),
+                              ])),
+                        )),
+                  ),
+                  SizedBox(
+                    height: 43.h,
+                  )
+                ],
+              ),
             ),
           );
         });

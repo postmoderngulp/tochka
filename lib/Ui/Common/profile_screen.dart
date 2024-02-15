@@ -53,11 +53,12 @@ class _subProfileScreenState extends State<subProfileScreen>
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<profileBloc>();
-
     return StreamBuilder<ProfileState>(
         stream: bloc.stream,
         initialData: bloc.state,
         builder: (context, snapshot) {
+          String name = utf8.decode(snapshot.data!.name.runes.toList());
+          String surname = utf8.decode(snapshot.data!.surname.runes.toList());
           return SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Column(
@@ -91,7 +92,7 @@ class _subProfileScreenState extends State<subProfileScreen>
                 ),
                 Center(
                   child: Text(
-                    "${snapshot.requireData.name} ${snapshot.requireData.surname}",
+                    "$name $surname",
                     style: TextStylee.homepage_text,
                   ),
                 ),
@@ -112,17 +113,26 @@ class _subProfileScreenState extends State<subProfileScreen>
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Wrap(
-                        children: List.generate(
-                            5,
-                            (index) => Padding(
-                                  padding: EdgeInsets.only(left: 2.w),
-                                  child: SvgPicture.asset(
-                                    "assets/image/star.svg",
-                                    width: 20.w,
-                                    height: 20.h,
-                                  ),
-                                )),
+                      SizedBox(
+                        width: 105.w,
+                      ),
+                      const Column(
+                        children: [
+                          Text('350'),
+                          Text('Подписок'),
+                        ],
+                      ),
+                      const Spacer(),
+                      SvgPicture.asset('assets/image/divider.svg'),
+                      const Spacer(),
+                      const Column(
+                        children: [
+                          Text('346'),
+                          Text('Подписчиков'),
+                        ],
+                      ),
+                      SizedBox(
+                        width: 92.w,
                       )
                     ],
                   ),
@@ -131,6 +141,8 @@ class _subProfileScreenState extends State<subProfileScreen>
                   height: 32.h,
                 ),
                 TabBar(
+                    dividerColor: Colors.transparent,
+                    indicatorColor: Colors.transparent,
                     splashFactory: NoSplash.splashFactory,
                     labelColor: Colors.white,
                     controller: _tabController,
@@ -198,8 +210,9 @@ class AboutMe extends StatelessWidget {
                   ),
                   SizedBox(
                     width: 323.w,
-                    child: Text(
-                        'Я нахожу вдохновение в природе, взаимодействии с людьми и исследовании различных культур. Мое творчество – это способ передать свои мысли и чувства через изобразительное искусство.'),
+                    child: Text(aboutMe.isEmpty
+                        ? 'Я нахожу вдохновение в природе, взаимодействии с людьми и исследовании различных культур. Мое творчество – это способ передать свои мысли и чувства через изобразительное искусство.'
+                        : aboutMe),
                   ),
                   SizedBox(
                     height: 36.h,
@@ -431,7 +444,7 @@ class GroupEventItem extends StatelessWidget {
         builder: (context, snapshot) {
           return Container(
             width: 325.w,
-            height: 85.h,
+            height: 80.h,
             decoration: BoxDecoration(
               color: Colors.white,
               boxShadow: [
@@ -468,7 +481,7 @@ class GroupEventItem extends StatelessWidget {
                   width: 13.w,
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 20.h, bottom: 15.h),
+                  padding: EdgeInsets.only(top: 13.h, bottom: 13.h),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -477,7 +490,7 @@ class GroupEventItem extends StatelessWidget {
                         utf8.decode(snapshot
                             .requireData.listMyEvent[index].title.runes
                             .toList()),
-                        style: TextStylee.subTitleGroup,
+                        style: TextStylee.titleGroup,
                       ),
                       SizedBox(
                         height: 4.h,
@@ -487,7 +500,7 @@ class GroupEventItem extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 SvgPicture.asset(
@@ -502,11 +515,11 @@ class GroupEventItem extends StatelessWidget {
                                   utf8.decode(snapshot.requireData
                                       .listMyEvent[index].datetime_event.runes
                                       .toList()),
-                                  style: TextStylee.subTitleGroup,
+                                  style: TextStylee.soraEvent,
                                 )
                               ]),
                           SizedBox(
-                            height: 3.h,
+                            height: 4.h,
                           ),
                           Row(children: [
                             SvgPicture.asset(
@@ -521,7 +534,7 @@ class GroupEventItem extends StatelessWidget {
                               utf8.decode(snapshot
                                   .requireData.listMyEvent[index].address.runes
                                   .toList()),
-                              style: TextStylee.Subsecond_text,
+                              style: TextStylee.soraEvent,
                             )
                           ]),
                         ],

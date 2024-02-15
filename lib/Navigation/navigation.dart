@@ -2,6 +2,7 @@ import 'package:Tochka_Sbora/Ui/Authorized/new_password.dart';
 import 'package:Tochka_Sbora/Ui/Authorized/recoveryPassword.dart';
 import 'package:Tochka_Sbora/Ui/Authorized/sign_up_user2.dart';
 import 'package:Tochka_Sbora/Ui/Authorized/sign_up_user3.dart';
+import 'package:Tochka_Sbora/Ui/Authorized/sign_up_user4.dart';
 import 'package:Tochka_Sbora/Ui/Common/main_screen.dart';
 import 'package:Tochka_Sbora/Ui/Common/main_screen_common.dart';
 import 'package:Tochka_Sbora/Ui/Common/more_info_event_user.dart';
@@ -37,6 +38,7 @@ abstract class NavigationRoutes {
   static String ChooseRegistrUser1Paths = 'auth/user1';
   static String ChooseRegistrUser2Paths = 'auth/user1/user2';
   static String ChooseRegistrUser3Paths = 'auth/user1/user2/user3';
+  static String ChooseRegistrUser4Paths = 'auth/user1/user2/user3/user4';
 
   static String MainScreen = 'auth/user1/user2/user3/mainScreenUser';
   static String chooseLocation =
@@ -53,6 +55,7 @@ class NavigateService {
     NavigationRoutes.ChooseRegistrUser1Paths: (context) => const signUpUser1(),
     NavigationRoutes.ChooseRegistrUser2Paths: (context) => const SignUpUser2(),
     NavigationRoutes.ChooseRegistrUser3Paths: (context) => const SignUpUser3(),
+    NavigationRoutes.ChooseRegistrUser4Paths: (context) => const SignUpUser4(),
     NavigationRoutes.ChooseRegistrAdm1Paths: (context) => const SignUpAdmin1(),
     NavigationRoutes.ChooseRegistrAdm2Paths: (context) => const SignUpAdmin2(),
     NavigationRoutes.MainScreen: (context) => const MainScreen(),

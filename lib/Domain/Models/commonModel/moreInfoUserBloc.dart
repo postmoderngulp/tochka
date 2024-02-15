@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:Tochka_Sbora/Domain/Api/api.dart';
+import 'package:Tochka_Sbora/Domain/Entity/event.dart';
 
 class MoreInfoScreenState {
   bool isSubscribe;
@@ -50,6 +51,20 @@ class UnSubscribeEvent implements MoreInfoScreenEvents {
   });
 }
 
+class GetEvents implements MoreInfoScreenEvents {
+  @override
+  int id = -1;
+  event Event;
+  GetEvents({
+    required this.Event,
+  });
+}
+
+class Setup implements MoreInfoScreenEvents {
+  @override
+  int id = -1;
+}
+
 class MoreInfoScreenBloc {
   MoreInfoScreenState _state = MoreInfoScreenState(
     isSubscribe: false,
@@ -65,11 +80,14 @@ class MoreInfoScreenBloc {
     _eventController.add(event);
   }
 
-  MoreInfoScreenBloc() {
+  MoreInfoScreenBloc(event Event) {
     _stream = _eventController.stream
         .asyncExpand<MoreInfoScreenState>(_mapEventsToStream)
         .asyncExpand(_updateState)
         .asBroadcastStream();
+    _stream.listen((event) {});
+    disPatch(GetEvents(Event: Event));
+    disPatch(Setup());
   }
 
   Stream<MoreInfoScreenState> _updateState(MoreInfoScreenState state) async* {
@@ -95,6 +113,21 @@ class MoreInfoScreenBloc {
       api.unSubscribeEvent(event.id, token!);
       yield MoreInfoScreenState(
         isSubscribe: false,
+      );
+    } else if (event is GetEvents) {
+      final api = Api();
+      const storage = FlutterSecureStorage();
+      final token = await storage.read(key: "access");
+      final listEvent = await api.getMyEvent(token!);
+      final val = listEvent.contains(event.Event);
+      await storage.write(key: "isSubscribe", value: val.toString());
+      print(val);
+    } else if (event is Setup) {
+      const storage = FlutterSecureStorage();
+      final isSubscribe = await storage.read(key: "isSubscribe");
+      bool val = isSubscribe == 'true' ? true : false;
+      yield MoreInfoScreenState(
+        isSubscribe: val,
       );
     }
   }

@@ -1,5 +1,6 @@
 import 'package:Tochka_Sbora/Domain/Models/organizerModel/create_event_model.dart';
 import 'package:Tochka_Sbora/style/styles/button_style.dart';
+import 'package:Tochka_Sbora/style/styles/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -46,18 +47,21 @@ class subCreateEvent extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: 52.h,
+                    height: 46.h,
                   ),
-                  Text(
-                    "Создание мероприятия",
-                    style: TextStylee.title_text,
+                  SizedBox(
+                    width: 280.w,
+                    child: Text(
+                      "Создание мероприятия",
+                      style: TextStylee.title_text,
+                    ),
                   ),
                   SizedBox(
                     height: 23.h,
                   ),
                   Text(
                     "Добавьте информацию о предстоящем мероприятии",
-                    style: TextStylee.Localsecond_text,
+                    style: TextStylee.subTitleSora,
                   ),
                   SizedBox(
                     height: 48.h,
@@ -117,15 +121,15 @@ class nameEventField extends StatelessWidget {
         width: 300.w,
         height: 40.h,
         child: CupertinoTextField(
-          padding: EdgeInsets.symmetric(horizontal: 19.w, vertical: 12.h),
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
           autofocus: true,
           keyboardType: TextInputType.emailAddress,
           onEditingComplete: () => FocusScope.of(context).nextFocus(),
           onChanged: (value) {},
           placeholder: "Название мероприятия",
-          placeholderStyle: TextStylee.second_text,
+          placeholderStyle: TextStylee.fieldStyle,
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
+            border: Border.all(color: colors.border),
             color: Colors.white,
             borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),
@@ -145,15 +149,15 @@ class placeEventField extends StatelessWidget {
         width: 300.w,
         height: 40.h,
         child: CupertinoTextField(
-          padding: EdgeInsets.symmetric(horizontal: 19.w, vertical: 12.h),
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
           autofocus: true,
           keyboardType: TextInputType.emailAddress,
           onEditingComplete: () => FocusScope.of(context).nextFocus(),
           onChanged: (value) {},
           placeholder: "Место проведения",
-          placeholderStyle: TextStylee.second_text,
+          placeholderStyle: TextStylee.fieldStyle,
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
+            border: Border.all(color: colors.border),
             color: Colors.white,
             borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),
@@ -173,15 +177,15 @@ class dateField extends StatelessWidget {
         width: 300.w,
         height: 40.h,
         child: CupertinoTextField(
-          padding: EdgeInsets.symmetric(horizontal: 19.w, vertical: 12.h),
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
           autofocus: true,
           keyboardType: TextInputType.emailAddress,
           onEditingComplete: () => FocusScope.of(context).nextFocus(),
           onChanged: (value) {},
           placeholder: "Дата проведения",
-          placeholderStyle: TextStylee.second_text,
+          placeholderStyle: TextStylee.fieldStyle,
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
+            border: Border.all(color: colors.border),
             color: Colors.white,
             borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),
@@ -213,25 +217,24 @@ class chooseCategory extends StatelessWidget {
                   fillColor: Colors.white,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide:
-                          const BorderSide(color: Colors.grey, width: 1)),
+                      borderSide: BorderSide(color: colors.border, width: 1)),
                   errorBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide:
-                          const BorderSide(color: Colors.grey, width: 1)),
+                      borderSide: BorderSide(color: colors.border, width: 1)),
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide:
-                          const BorderSide(color: Colors.grey, width: 1)),
+                      borderSide: BorderSide(color: colors.border, width: 1)),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide:
-                          const BorderSide(color: Colors.grey, width: 1)),
+                      borderSide: BorderSide(color: colors.border, width: 1)),
                 ),
                 isExpanded: true,
-                hint: Text(
-                  'Выбрать категорию',
-                  style: TextStylee.second_text,
+                hint: Padding(
+                  padding: EdgeInsets.only(left: 8.w),
+                  child: Text(
+                    'Выбрать категорию',
+                    style: TextStylee.fieldStyle,
+                  ),
                 ),
                 icon: const Icon(Icons.keyboard_arrow_down_sharp),
                 value: (value.isEmpty) ? null : value,
@@ -261,10 +264,10 @@ class TimeStartingField extends StatelessWidget {
         width: 136.w,
         height: 40.h,
         child: CupertinoTextField(
-          padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 12.h),
+          padding: EdgeInsets.only(right: 8.w, top: 10.h, bottom: 10.h),
           autofocus: true,
           prefix: Padding(
-            padding: EdgeInsets.only(left: 4.w),
+            padding: EdgeInsets.only(right: 8.w, left: 12.w),
             child: SvgPicture.asset(
               "assets/image/clock.svg",
               width: 16.w,
@@ -275,9 +278,9 @@ class TimeStartingField extends StatelessWidget {
           onEditingComplete: () => FocusScope.of(context).nextFocus(),
           onChanged: (value) {},
           placeholder: "Время начала",
-          placeholderStyle: TextStylee.second_text,
+          placeholderStyle: TextStylee.fieldStyle,
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
+            border: Border.all(color: colors.border),
             color: Colors.white,
             borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),
@@ -297,10 +300,10 @@ class TimeFinishField extends StatelessWidget {
         width: 142.w,
         height: 40.h,
         child: CupertinoTextField(
-          padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 12.h),
+          padding: EdgeInsets.only(right: 8.w, top: 10.h, bottom: 10.h),
           autofocus: true,
           prefix: Padding(
-            padding: EdgeInsets.only(left: 4.w),
+            padding: EdgeInsets.only(right: 8.w, left: 12.w),
             child: SvgPicture.asset(
               "assets/image/clock.svg",
               width: 16.w,
@@ -311,9 +314,9 @@ class TimeFinishField extends StatelessWidget {
           onEditingComplete: () => FocusScope.of(context).nextFocus(),
           onChanged: (value) {},
           placeholder: "Время окончания",
-          placeholderStyle: TextStylee.second_text,
+          placeholderStyle: TextStylee.fieldStyle,
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
+            border: Border.all(color: colors.border),
             color: Colors.white,
             borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),
@@ -336,11 +339,11 @@ class DescriptionField extends StatelessWidget {
         onChanged: (value) {},
         padding: EdgeInsets.only(left: 14.w, top: 14.h),
         placeholder: "Описание",
-        placeholderStyle: TextStylee.second_text,
+        placeholderStyle: TextStylee.fieldStyle,
         textAlign: TextAlign.left,
         textAlignVertical: TextAlignVertical.top,
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
+          border: Border.all(color: colors.border),
           color: Colors.white,
           borderRadius: const BorderRadius.all(Radius.circular(10)),
         ),

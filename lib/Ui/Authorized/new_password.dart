@@ -1,5 +1,6 @@
 import 'package:Tochka_Sbora/Domain/Models/authModel/new_password.dart';
 import 'package:Tochka_Sbora/style/styles/button_style.dart';
+import 'package:Tochka_Sbora/style/styles/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -93,7 +94,7 @@ class DropPassword extends StatelessWidget {
           style: Buttonstyle.main_button_style,
           child: Text(
             "Сбросить пароль",
-            style: TextStylee.myDateWhite_text,
+            style: TextStylee.fieldStyle,
           ),
         ),
       ),
@@ -117,17 +118,19 @@ class PasswordField extends StatelessWidget {
               "assets/image/Lock.svg",
               width: 22.w,
               height: 22.h,
+              colorFilter: ColorFilter.mode(colors.neutral300, BlendMode.srcIn),
             ),
           ),
           padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 14.w),
           autofocus: true,
           keyboardType: TextInputType.emailAddress,
+          obscureText: true,
           onEditingComplete: () => FocusScope.of(context).nextFocus(),
           onChanged: (value) {},
           placeholder: "Пароль",
-          placeholderStyle: TextStylee.second_text,
+          placeholderStyle: TextStylee.fieldStyle,
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
+            border: Border.all(color: colors.border),
             color: Colors.white,
             borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),
@@ -153,9 +156,12 @@ class RepeatPasswordField extends StatelessWidget {
               "assets/image/Lock.svg",
               width: 22.w,
               height: 22.h,
+              colorFilter: ColorFilter.mode(colors.neutral300, BlendMode.srcIn),
             ),
           ),
+          obscureText: true,
           padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 14.w),
+          style: TextStylee.fieldStyle,
           autofocus: true,
           keyboardType: TextInputType.emailAddress,
           onEditingComplete: () => FocusScope.of(context).nextFocus(),
@@ -163,7 +169,7 @@ class RepeatPasswordField extends StatelessWidget {
           placeholder: "Повторите пароль",
           placeholderStyle: TextStylee.second_text,
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
+            border: Border.all(color: colors.border),
             color: Colors.white,
             borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),

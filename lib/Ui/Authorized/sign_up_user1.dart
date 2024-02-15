@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:Tochka_Sbora/style/styles/colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 import '../../Domain/Models/authModel/sign_up_user1_model.dart';
 import '../../style/styles/button_style.dart';
 import '../../style/styles/text_style.dart';
@@ -49,24 +50,32 @@ class subSignUpUser1 extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SvgPicture.asset(
-                      "assets/image/first_progress.svg",
-                      width: 94.w,
+                      "assets/image/active_progress.svg",
+                      width: 70.w,
                       height: 3.h,
                     ),
                     SizedBox(
-                      width: 12.w,
+                      width: 10.w,
                     ),
                     SvgPicture.asset(
                       "assets/image/neutral_progress.svg",
-                      width: 94.w,
+                      width: 70.w,
                       height: 3.h,
                     ),
                     SizedBox(
-                      width: 12.w,
+                      width: 10.w,
                     ),
                     SvgPicture.asset(
                       "assets/image/neutral_progress.svg",
-                      width: 94.w,
+                      width: 70.w,
+                      height: 3.h,
+                    ),
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                    SvgPicture.asset(
+                      "assets/image/neutral_progress.svg",
+                      width: 70.w,
                       height: 3.h,
                     ),
                   ],
@@ -81,13 +90,13 @@ class subSignUpUser1 extends StatelessWidget {
               ),
               Text(
                 "Расскажи о себе:",
-                style: TextStylee.title_text,
+                style: TextStylee.TitleSora,
+              ),
+              SizedBox(
+                height: 41.h,
               ),
               Column(
                 children: [
-                  SizedBox(
-                    height: 80.h,
-                  ),
                   // ignore: prefer_const_constructors
                   nicknameField(),
                   SizedBox(
@@ -101,7 +110,7 @@ class subSignUpUser1 extends StatelessWidget {
                   SizedBox(
                     height: 30.h,
                   ),
-                  const dobField(),
+                  const timePicker(),
                   SizedBox(
                     height: 30.h,
                   ),
@@ -128,7 +137,7 @@ class subSignUpUser1 extends StatelessWidget {
                 style: TextStylee.second_text,
               ),
               SizedBox(
-                height: 90.h,
+                height: 69.h,
               ),
               const continueButton(),
               SizedBox(
@@ -186,13 +195,24 @@ class nameField extends StatelessWidget {
       child: TextFormField(
         onChanged: (value) => model.firstName = value,
         decoration: InputDecoration(
+          contentPadding:
+              EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
           filled: true,
           fillColor: Colors.white,
+          errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
           border: OutlineInputBorder(
-              borderSide: BorderSide(color: colors.TextColor, width: 1),
+              borderSide: BorderSide(color: colors.border, width: 1),
               borderRadius: BorderRadius.circular(10.0)),
           hintText: "Имя*",
-          hintStyle: TextStylee.second_text,
+          hintStyle: TextStylee.fieldStyle,
         ),
       ),
     );
@@ -211,13 +231,24 @@ class surnameField extends StatelessWidget {
       child: TextFormField(
         onChanged: (value) => model.lastName = value,
         decoration: InputDecoration(
+          contentPadding:
+              EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
           filled: true,
           fillColor: Colors.white,
+          errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
           border: OutlineInputBorder(
-              borderSide: BorderSide(color: colors.TextColor, width: 1),
+              borderSide: BorderSide(color: colors.border, width: 1),
               borderRadius: BorderRadius.circular(10.0)),
           hintText: "Фамилия*",
-          hintStyle: TextStylee.second_text,
+          hintStyle: TextStylee.fieldStyle,
         ),
       ),
     );
@@ -236,38 +267,24 @@ class emailField extends StatelessWidget {
       child: TextFormField(
         onChanged: (value) => model.email = value,
         decoration: InputDecoration(
+          contentPadding:
+              EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
           filled: true,
           fillColor: Colors.white,
+          errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
           border: OutlineInputBorder(
-              borderSide: BorderSide(color: colors.TextColor, width: 1),
+              borderSide: BorderSide(color: colors.border, width: 1),
               borderRadius: BorderRadius.circular(10.0)),
           hintText: "E-mail*",
-          hintStyle: TextStylee.second_text,
-        ),
-      ),
-    );
-  }
-}
-
-class dobField extends StatelessWidget {
-  const dobField({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final model = context.watch<SignUpUser1Model>();
-    return SizedBox(
-      width: 350.w,
-      height: 45.h,
-      child: TextFormField(
-        onChanged: (value) => model.dob = value,
-        decoration: InputDecoration(
-          filled: true,
-          fillColor: Colors.white,
-          border: OutlineInputBorder(
-              borderSide: BorderSide(color: colors.TextColor, width: 1),
-              borderRadius: BorderRadius.circular(10.0)),
-          hintText: "Дата рождения",
-          hintStyle: TextStylee.second_text,
+          hintStyle: TextStylee.fieldStyle,
         ),
       ),
     );
@@ -286,13 +303,24 @@ class aboutField extends StatelessWidget {
       child: TextFormField(
         onChanged: (value) => model.about = value,
         decoration: InputDecoration(
+          contentPadding:
+              EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
           filled: true,
           fillColor: Colors.white,
+          errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
           border: OutlineInputBorder(
-              borderSide: BorderSide(color: colors.TextColor, width: 1),
+              borderSide: BorderSide(color: colors.border, width: 1),
               borderRadius: BorderRadius.circular(10.0)),
           hintText: "Расскажите о вас",
-          hintStyle: TextStylee.second_text,
+          hintStyle: TextStylee.fieldStyle,
         ),
       ),
     );
@@ -309,15 +337,27 @@ class passwordField extends StatelessWidget {
       width: 350.w,
       height: 45.h,
       child: TextFormField(
+        obscureText: true,
         onChanged: (value) => model.password = value,
         decoration: InputDecoration(
+          contentPadding:
+              EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
           filled: true,
           fillColor: Colors.white,
+          errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
           border: OutlineInputBorder(
-              borderSide: BorderSide(color: colors.TextColor, width: 1),
+              borderSide: BorderSide(color: colors.border, width: 1),
               borderRadius: BorderRadius.circular(10.0)),
           hintText: "Пароль*",
-          hintStyle: TextStylee.second_text,
+          hintStyle: TextStylee.fieldStyle,
         ),
       ),
     );
@@ -336,13 +376,24 @@ class nicknameField extends StatelessWidget {
       child: TextFormField(
         onChanged: (value) => model.nickName = value,
         decoration: InputDecoration(
+          contentPadding:
+              EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
           filled: true,
           fillColor: Colors.white,
+          errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
           border: OutlineInputBorder(
-              borderSide: BorderSide(color: colors.TextColor, width: 1),
+              borderSide: BorderSide(color: colors.border, width: 1),
               borderRadius: BorderRadius.circular(10.0)),
           hintText: "Nickname",
-          hintStyle: TextStylee.second_text,
+          hintStyle: TextStylee.fieldStyle,
         ),
       ),
     );
@@ -405,25 +456,24 @@ class sexField extends StatelessWidget {
                   fillColor: Colors.white,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide:
-                          const BorderSide(color: Colors.grey, width: 1)),
+                      borderSide: BorderSide(color: colors.border, width: 1)),
                   errorBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide:
-                          const BorderSide(color: Colors.grey, width: 1)),
+                      borderSide: BorderSide(color: colors.border, width: 1)),
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide:
-                          const BorderSide(color: Colors.grey, width: 1)),
+                      borderSide: BorderSide(color: colors.border, width: 1)),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide:
-                          const BorderSide(color: Colors.grey, width: 1)),
+                      borderSide: BorderSide(color: colors.border, width: 1)),
                 ),
                 isExpanded: true,
-                hint: Text(
-                  'Пол',
-                  style: TextStylee.second_text,
+                hint: Padding(
+                  padding: EdgeInsets.only(left: 10.w),
+                  child: Text(
+                    'Пол',
+                    style: TextStylee.fieldStyle,
+                  ),
                 ),
                 icon: const Icon(Icons.keyboard_arrow_down_sharp),
                 value: (value.isEmpty) ? null : value,
@@ -443,5 +493,113 @@ class sexField extends StatelessWidget {
             }),
       ),
     );
+  }
+}
+
+class timePicker extends StatefulWidget {
+  const timePicker({super.key});
+
+  @override
+  State<timePicker> createState() => _timePickerState();
+}
+
+class _timePickerState extends State<timePicker> {
+  DateTime _selectDate = DateTime.now();
+
+  Future<void> _pickDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        locale: const Locale('ru'),
+        builder: (BuildContext context, Widget? child) {
+          return Theme(
+            data: ThemeData(
+              colorScheme: ColorScheme.light(
+                primary: colors.AccentColor, // header background color
+                onPrimary: Colors.white, // header text color
+                onSurface: Colors.black,
+              ),
+              primaryColor: colors.MainColor,
+              dialogBackgroundColor: Colors.white,
+            ),
+            child: child!,
+          );
+        },
+        context: context,
+        initialDate: _selectDate,
+        firstDate: DateTime(1900),
+        lastDate: DateTime(2070));
+    if (picked != _selectDate) {
+      setState(() {
+        _selectDate = picked!;
+      });
+    }
+    print(picked!.toLocal());
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final model = context.watch<SignUpUser1Model>();
+    String month = '';
+    switch (_selectDate.month) {
+      case 1:
+        month = 'Января';
+        break;
+      case 2:
+        month = 'Февраля';
+        break;
+      case 3:
+        month = 'Марта';
+        break;
+      case 4:
+        month = 'Апреля';
+        break;
+      case 5:
+        month = 'Мая';
+        break;
+      case 6:
+        month = 'Июня';
+        break;
+      case 7:
+        month = 'Июля';
+        break;
+      case 8:
+        month = 'Августа';
+        break;
+      case 9:
+        month = 'Сентября';
+        break;
+      case 10:
+        month = 'Октября';
+        break;
+      case 11:
+        month = 'Ноября';
+        break;
+      case 12:
+        month = 'Декабря';
+    }
+    return SizedBox(
+        width: 350.w,
+        height: 45.h,
+        child: ElevatedButton(
+          style: ButtonStyle(
+              elevation: const MaterialStatePropertyAll(0),
+              backgroundColor:
+                  const MaterialStatePropertyAll(Colors.transparent),
+              shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  side: BorderSide(width: 1, color: colors.border)))),
+          onPressed: () {
+            _pickDate(context);
+            DateFormat formatter = DateFormat('yyyy-MM-dd');
+            String formattedDate = formatter.format(_selectDate.toLocal());
+            model.dob = formattedDate.toString();
+          },
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "Дата рождения:${_selectDate.day.toString()} $month",
+              style: TextStylee.fieldStyle,
+            ),
+          ),
+        ));
   }
 }

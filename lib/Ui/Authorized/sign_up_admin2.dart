@@ -51,11 +51,11 @@ class subSignUpAdmin2 extends StatelessWidget {
           ),
           Text(
             "Код выдается другим администратором",
-            style: TextStylee.second_text,
+            style: TextStylee.fieldStyle,
           ),
           Text(
             "для подтверждения регистрации",
-            style: TextStylee.second_text,
+            style: TextStylee.fieldStyle,
           ),
           SizedBox(
             height: 220.h,
@@ -80,10 +80,16 @@ class inputConfirmCode extends StatelessWidget {
         decoration: InputDecoration(
           filled: true,
           fillColor: Colors.white,
+          errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(0),
+              borderSide: BorderSide(color: colors.border, width: 1)),
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(0),
+              borderSide: BorderSide(color: colors.border, width: 1)),
           border: OutlineInputBorder(
-              borderSide: BorderSide(color: colors.TextColor, width: 1),
-              borderRadius: BorderRadius.circular(0)),
-          hintStyle: TextStylee.second_text,
+              borderSide: BorderSide(color: colors.border, width: 1),
+              borderRadius: BorderRadius.circular(0.0)),
+          hintStyle: TextStylee.fieldStyle,
         ),
       ),
     );

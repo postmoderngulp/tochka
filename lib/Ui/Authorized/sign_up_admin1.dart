@@ -112,13 +112,24 @@ class nameField extends StatelessWidget {
       height: 45.h,
       child: TextFormField(
         decoration: InputDecoration(
+          contentPadding:
+              EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
           filled: true,
           fillColor: Colors.white,
+          errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
           border: OutlineInputBorder(
-              borderSide: BorderSide(color: colors.TextColor, width: 1),
+              borderSide: BorderSide(color: colors.border, width: 1),
               borderRadius: BorderRadius.circular(10.0)),
           hintText: "Имя*",
-          hintStyle: TextStylee.second_text,
+          hintStyle: TextStylee.fieldStyle,
         ),
       ),
     );
@@ -136,13 +147,24 @@ class surnameField extends StatelessWidget {
       height: 45.h,
       child: TextFormField(
         decoration: InputDecoration(
+          contentPadding:
+              EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
           filled: true,
           fillColor: Colors.white,
+          errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
           border: OutlineInputBorder(
-              borderSide: BorderSide(color: colors.TextColor, width: 1),
+              borderSide: BorderSide(color: colors.border, width: 1),
               borderRadius: BorderRadius.circular(10.0)),
           hintText: "Фамилия*",
-          hintStyle: TextStylee.second_text,
+          hintStyle: TextStylee.fieldStyle,
         ),
       ),
     );
@@ -160,13 +182,24 @@ class emailField extends StatelessWidget {
       height: 45.h,
       child: TextFormField(
         decoration: InputDecoration(
+          contentPadding:
+              EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
           filled: true,
           fillColor: Colors.white,
+          errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
           border: OutlineInputBorder(
-              borderSide: BorderSide(color: colors.TextColor, width: 1),
+              borderSide: BorderSide(color: colors.border, width: 1),
               borderRadius: BorderRadius.circular(10.0)),
           hintText: "E-mail*",
-          hintStyle: TextStylee.second_text,
+          hintStyle: TextStylee.fieldStyle,
         ),
       ),
     );
@@ -183,14 +216,26 @@ class passwordField extends StatelessWidget {
       width: 350.w,
       height: 45.h,
       child: TextFormField(
+        obscureText: true,
         decoration: InputDecoration(
+          contentPadding:
+              EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
           filled: true,
           fillColor: Colors.white,
+          errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colors.border, width: 1)),
           border: OutlineInputBorder(
-              borderSide: BorderSide(color: colors.TextColor, width: 1),
+              borderSide: BorderSide(color: colors.border, width: 1),
               borderRadius: BorderRadius.circular(10.0)),
           hintText: "Пароль*",
-          hintStyle: TextStylee.second_text,
+          hintStyle: TextStylee.fieldStyle,
         ),
       ),
     );

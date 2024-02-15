@@ -24,6 +24,7 @@ class subSignUpUser3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = context.watch<SignUpUser3Model>();
+    final email = ModalRoute.of(context)!.settings.arguments as String;
     return SafeArea(
         child: Scaffold(
       backgroundColor: Colors.white,
@@ -46,24 +47,32 @@ class subSignUpUser3 extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SvgPicture.asset(
-                    "assets/image/first_progress.svg",
-                    width: 94.w,
+                    "assets/image/active_progress.svg",
+                    width: 70.w,
                     height: 3.h,
                   ),
                   SizedBox(
-                    width: 12.w,
+                    width: 10.w,
                   ),
                   SvgPicture.asset(
-                    "assets/image/first_progress.svg",
-                    width: 94.w,
+                    "assets/image/active_progress.svg",
+                    width: 70.w,
                     height: 3.h,
                   ),
                   SizedBox(
-                    width: 12.w,
+                    width: 10.w,
+                  ),
+                  SvgPicture.asset(
+                    "assets/image/active_progress.svg",
+                    width: 70.w,
+                    height: 3.h,
+                  ),
+                  SizedBox(
+                    width: 10.w,
                   ),
                   SvgPicture.asset(
                     "assets/image/neutral_progress.svg",
-                    width: 94.w,
+                    width: 70.w,
                     height: 3.h,
                   ),
                 ],
@@ -105,7 +114,7 @@ class subSignUpUser3 extends StatelessWidget {
               height: 26.h,
             ),
             GestureDetector(
-              onTap: () => model.goToEntry(context),
+              onTap: () => model.goToConfirmEmail(context, email),
               child: Center(
                 child: Text(
                   "Пропустить",

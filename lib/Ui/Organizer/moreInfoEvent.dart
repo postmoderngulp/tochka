@@ -28,10 +28,10 @@ class subMoreinfoEvent extends StatelessWidget {
   Widget build(BuildContext context) {
     final bloc = context.read<moreInfoEventOrganizerModel>();
     final Event = ModalRoute.of(context)!.settings.arguments as event;
-    // String title = utf8.decode(Event.title.runes.toList());
-    // String time = utf8.decode(Event.title.runes.toList());
-    // String address = utf8.decode(Event.title.runes.toList());
-    // String description = utf8.decode(Event.description.runes.toList());
+    String title = utf8.decode(Event.title.runes.toList());
+    String time = utf8.decode(Event.title.runes.toList());
+    String address = utf8.decode(Event.title.runes.toList());
+    String description = utf8.decode(Event.description.runes.toList());
     return SafeArea(
         child: Scaffold(
       backgroundColor: Colors.white,
@@ -69,7 +69,7 @@ class subMoreinfoEvent extends StatelessWidget {
                 SizedBox(
                   width: 219.w,
                   child: Text(
-                    Event.title,
+                    title,
                     style: TextStylee.title_text,
                   ),
                 ),
@@ -93,7 +93,7 @@ class subMoreinfoEvent extends StatelessWidget {
                     width: 3.w,
                   ),
                   Text(
-                    Event.datetime_event,
+                    time,
                     style: TextStylee.Subsecond_text,
                   )
                 ]),
@@ -110,7 +110,7 @@ class subMoreinfoEvent extends StatelessWidget {
                     width: 3.w,
                   ),
                   Text(
-                    Event.address,
+                    address,
                     style: TextStylee.Subsecond_text,
                   )
                 ]),
@@ -184,7 +184,7 @@ class subMoreinfoEvent extends StatelessWidget {
                           style: Buttonstyle.yeloww_button_style,
                           child: Text(
                             "Я иду",
-                            style: TextStylee.Subsecond_text,
+                            style: TextStylee.Subsecond_text_black,
                           ),
                         ),
                       ),
@@ -210,7 +210,7 @@ class subMoreinfoEvent extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 29.w),
             child: Text(
-              Event.description,
+              description,
               style: TextStylee.second_text,
             ),
           ),

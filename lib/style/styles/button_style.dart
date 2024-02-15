@@ -46,7 +46,7 @@ abstract class Buttonstyle {
 
   static ButtonStyle self_button_style = ButtonStyle(
       elevation: MaterialStateProperty.all(0),
-      backgroundColor: MaterialStateProperty.all(colors.oranjeColor),
+      backgroundColor: MaterialStateProperty.all(colors.MainColor),
       shape: MaterialStateProperty.all(RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       )));
@@ -56,5 +56,5 @@ abstract class Buttonstyle {
       backgroundColor: MaterialStateProperty.all(Colors.transparent),
       shape: MaterialStateProperty.all(RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
-          side: BorderSide(color: colors.oranjeColor, width: 1))));
+          side: BorderSide(color: colors.MainColor, width: 1))));
 }

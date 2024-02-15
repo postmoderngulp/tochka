@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'package:Tochka_Sbora/Domain/Models/commonModel/filter_model_common.dart';
 import 'package:Tochka_Sbora/Domain/Models/commonModel/main_screen_bloc.dart';
+import 'package:Tochka_Sbora/style/styles/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:Tochka_Sbora/style/styles/text_style.dart';
@@ -101,10 +103,10 @@ class searchField extends StatelessWidget {
     final bloc = context.read<MainScreenBloc>();
     return Center(
       child: SizedBox(
-        width: 305.w,
-        height: 40.h,
+        width: 335.w,
+        height: 42.h,
         child: CupertinoTextField(
-          padding: EdgeInsets.symmetric(horizontal: 19.w, vertical: 12.h),
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
           prefix: Padding(
             padding: EdgeInsets.only(left: 16.w),
             child: SvgPicture.asset(
@@ -113,18 +115,439 @@ class searchField extends StatelessWidget {
               height: 14.h,
             ),
           ),
+          suffix: GestureDetector(
+            onTap: () => showModalBottomSheet<dynamic>(
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(38),
+                      topRight: Radius.circular(38))),
+              isScrollControlled: true,
+              context: context,
+              builder: (BuildContext context) {
+                return ChangeNotifierProvider(
+                  create: (context) => FilterCommmonModel(),
+                  child: const FilterBanner(),
+                );
+              },
+            ),
+            child: Padding(
+              padding: EdgeInsets.only(right: 16.w),
+              child: SvgPicture.asset(
+                "assets/image/filter.svg",
+                width: 22.w,
+                height: 22.h,
+              ),
+            ),
+          ),
           keyboardType: TextInputType.emailAddress,
           onEditingComplete: () => FocusScope.of(context).nextFocus(),
           onChanged: (value) {},
           placeholder: "Найти событие",
-          placeholderStyle: TextStylee.second_text,
+          placeholderStyle: TextStylee.subTitleSora,
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
+            border: Border.all(color: colors.border),
             color: Colors.white,
             borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),
         ),
       ),
+    );
+  }
+}
+
+class FilterBanner extends StatelessWidget {
+  const FilterBanner({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(38), topRight: Radius.circular(38))),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            height: 12.h,
+          ),
+          Center(child: SvgPicture.asset('assets/image/top_panel.svg')),
+          SizedBox(
+            height: 15.h,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: Text(
+              "Фильтр",
+              style: TextStylee.subAlert_title_text,
+            ),
+          ),
+          SizedBox(
+            height: 30.h,
+          ),
+          const listInterest(),
+          SizedBox(
+            height: 27.h,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: Text(
+              "Время и дата",
+              style: TextStylee.subAlert_title_text,
+            ),
+          ),
+          SizedBox(
+            height: 12.h,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 20.w),
+            child: const listTimes(),
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 25.w),
+            child: const timePicker(),
+          ),
+          SizedBox(
+            height: 26.h,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: Text(
+              "Местоположение",
+              style: TextStylee.subAlert_title_text,
+            ),
+          ),
+          SizedBox(
+            height: 12.h,
+          ),
+          const chooseLocation(),
+          SizedBox(
+            height: 180.h,
+          ),
+          const ActionGroupButton(),
+          SizedBox(
+            height: 21.h,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class timePicker extends StatefulWidget {
+  const timePicker({super.key});
+
+  @override
+  State<timePicker> createState() => _timePickerState();
+}
+
+class _timePickerState extends State<timePicker> {
+  DateTime _selectDate = DateTime.now();
+
+  Future<void> _pickDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        locale: const Locale('ru'),
+        builder: (BuildContext context, Widget? child) {
+          return Theme(
+            data: ThemeData(
+              colorScheme: ColorScheme.light(
+                primary: colors.AccentColor, // header background color
+                onPrimary: Colors.white, // header text color
+                onSurface: Colors.black,
+              ),
+              primaryColor: colors.MainColor,
+              dialogBackgroundColor: Colors.white,
+            ),
+            child: child!,
+          );
+        },
+        context: context,
+        initialDate: _selectDate,
+        firstDate: DateTime(1900),
+        lastDate: DateTime(2070));
+    if (picked != _selectDate) {
+      setState(() {
+        _selectDate = picked!;
+      });
+    }
+    print(picked!.toLocal());
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    String month = '';
+    switch (_selectDate.month) {
+      case 1:
+        month = 'Января';
+        break;
+      case 2:
+        month = 'Февраля';
+        break;
+      case 3:
+        month = 'Марта';
+        break;
+      case 4:
+        month = 'Апреля';
+        break;
+      case 5:
+        month = 'Мая';
+        break;
+      case 6:
+        month = 'Июня';
+        break;
+      case 7:
+        month = 'Июля';
+        break;
+      case 8:
+        month = 'Августа';
+        break;
+      case 9:
+        month = 'Сентября';
+        break;
+      case 10:
+        month = 'Октября';
+        break;
+      case 11:
+        month = 'Ноября';
+        break;
+      case 12:
+        month = 'Декабря';
+    }
+    return SizedBox(
+        width: 241.w,
+        height: 42.h,
+        child: ElevatedButton(
+          style: ButtonStyle(
+              elevation: const MaterialStatePropertyAll(0),
+              backgroundColor:
+                  const MaterialStatePropertyAll(Colors.transparent),
+              shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  side: const BorderSide(width: 1, color: Colors.grey)))),
+          onPressed: () => _pickDate(context),
+          child: Row(
+            children: [
+              SvgPicture.asset(
+                "assets/image/timePicker.svg",
+                width: 21.w,
+                height: 21.h,
+              ),
+              SizedBox(
+                width: 9.w,
+              ),
+              Text(
+                "${_selectDate.day.toString()} $month",
+                style: TextStylee.second_text,
+              ),
+            ],
+          ),
+        ));
+  }
+}
+
+class ActionGroupButton extends StatelessWidget {
+  const ActionGroupButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 137.w,
+            height: 55.h,
+            child: ElevatedButton(
+              style: ButtonStyle(
+                  elevation: const MaterialStatePropertyAll(0),
+                  backgroundColor:
+                      const MaterialStatePropertyAll(Colors.transparent),
+                  shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      side: BorderSide(width: 1, color: colors.MainColor)))),
+              onPressed: () {},
+              child: Center(
+                child: Text(
+                  "Очистить",
+                  style: TextStylee.main_text,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 11.w,
+          ),
+          SizedBox(
+            width: 179.w,
+            height: 55.h,
+            child: ElevatedButton(
+              style: ButtonStyle(
+                  elevation: const MaterialStatePropertyAll(0),
+                  backgroundColor: MaterialStatePropertyAll(colors.MainColor),
+                  shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      side: BorderSide(width: 1, color: colors.MainColor)))),
+              onPressed: () {},
+              child: Center(
+                child: Text(
+                  "Принять",
+                  style: TextStylee.white_text,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class chooseLocation extends StatelessWidget {
+  const chooseLocation({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: SizedBox(
+          width: 334.w,
+          height: 60.h,
+          child: ElevatedButton(
+            style: ButtonStyle(
+                elevation: const MaterialStatePropertyAll(0),
+                backgroundColor:
+                    const MaterialStatePropertyAll(Colors.transparent),
+                shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    side: const BorderSide(width: 1, color: Colors.grey)))),
+            onPressed: () {},
+            child: Row(
+              children: [
+                SvgPicture.asset(
+                  "assets/image/chooseLocation.svg",
+                  width: 45.w,
+                  height: 45.h,
+                ),
+                SizedBox(
+                  width: 9.w,
+                ),
+                Text(
+                  "Оренбург",
+                  style: TextStylee.big_second_text,
+                ),
+              ],
+            ),
+          )),
+    );
+  }
+}
+
+class listTimes extends StatelessWidget {
+  const listTimes({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final model = context.watch<FilterCommmonModel>();
+    return Wrap(
+      children: List.generate(
+          model.listTimes.length,
+          (index) => Padding(
+                padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 5.h),
+                child: Item(index: index),
+              )),
+    );
+  }
+}
+
+class Item extends StatelessWidget {
+  int index;
+  Item({super.key, required this.index});
+
+  @override
+  Widget build(BuildContext context) {
+    final model = context.watch<FilterCommmonModel>();
+    return SizedBox(
+      height: 41.h,
+      child: ElevatedButton(
+          style: ButtonStyle(
+              elevation: const MaterialStatePropertyAll(0),
+              backgroundColor: model.chooseVal != index
+                  ? const MaterialStatePropertyAll(Colors.transparent)
+                  : MaterialStatePropertyAll(colors.MainColor),
+              shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  side: model.chooseVal != index
+                      ? const BorderSide(width: 1, color: Colors.grey)
+                      : BorderSide.none))),
+          onPressed: () => model.setVal(index),
+          child: Text(
+            model.listTimes[index],
+            style: model.chooseVal != index
+                ? TextStylee.second_text
+                : TextStylee.location_text,
+          )),
+    );
+  }
+}
+
+class listInterest extends StatelessWidget {
+  const listInterest({super.key});
+  @override
+  Widget build(BuildContext context) {
+    final model = context.watch<FilterCommmonModel>();
+    return SizedBox(
+      height: 117.h,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        physics: const BouncingScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: 7,
+        itemBuilder: (BuildContext context, int index) => Padding(
+            padding: EdgeInsets.only(left: 16.w), child: const InterestsItem()),
+      ),
+    );
+  }
+}
+
+class InterestsItem extends StatelessWidget {
+  const InterestsItem({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+          height: 2.h,
+        ),
+        Container(
+          width: 63.w,
+          height: 63.h,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.4),
+                spreadRadius: 1,
+                blurRadius: 3, // changes position of shadow
+              ),
+            ],
+          ),
+          child: Image.asset("assets/image/cook.png"),
+        ),
+        SizedBox(
+          height: 11.h,
+        ),
+        Text(
+          "Еда",
+          style: TextStylee.titleRegularGroup,
+        ),
+      ],
     );
   }
 }
@@ -306,7 +729,7 @@ class GroupBannerItem extends StatelessWidget {
         builder: (context, snapshot) {
           return Container(
             width: 325.w,
-            height: 75.h,
+            height: 76.h,
             decoration: BoxDecoration(
               color: Colors.white,
               boxShadow: [

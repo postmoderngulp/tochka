@@ -9,10 +9,16 @@ abstract class TextStylee {
       color: colors.neutral800, fontFamily: "SoraSemiBold", fontSize: 12.sp);
   static TextStyle littleBlackTxt = TextStyle(
       color: Colors.black, fontFamily: "SoraRegular", fontSize: 12.sp);
+  static TextStyle subTitleSora = TextStyle(
+      color: colors.neutral800, fontFamily: "SoraRegular", fontSize: 12.sp);
+  static TextStyle soraEvent = TextStyle(
+      color: colors.neutral500, fontFamily: "SoraRegular", fontSize: 9.sp);
   static TextStyle littleMainTxt = TextStyle(
       color: colors.MainColor, fontFamily: "SoraRegular", fontSize: 12.sp);
+  static TextStyle TitleSora = TextStyle(
+      color: colors.neutral800, fontFamily: "SoraRegular", fontSize: 16.sp);
   static TextStyle fieldStyle = TextStyle(
-      color: colors.neutral500, fontFamily: "SfProRegular", fontSize: 14.sp);
+      color: colors.neutral300, fontFamily: "SfProRegular", fontSize: 14.sp);
   static TextStyle littleStyle = TextStyle(
       color: colors.neutral400, fontFamily: "SfProRegular", fontSize: 12.sp);
   static TextStyle buttonTxtStyle = TextStyle(
@@ -23,9 +29,11 @@ abstract class TextStylee {
   static TextStyle subTitleGroup = TextStyle(
       color: colors.neutral400, fontFamily: "SoraRegular", fontSize: 10.sp);
   static TextStyle second_text = TextStyle(
-      color: colors.TextColor, fontFamily: "GeometriaLight", fontSize: 12.sp);
+      color: colors.neutral300, fontFamily: "GeometriaLight", fontSize: 12.sp);
   static TextStyle Subsecond_text = TextStyle(
       color: colors.TextColor, fontFamily: "GeometriaLight", fontSize: 9.sp);
+  static TextStyle Subsecond_text_black = TextStyle(
+      color: Colors.black, fontFamily: "GeometriaLight", fontSize: 9.sp);
   static TextStyle Localsecond_text = TextStyle(
       color: colors.TextColor, fontFamily: "GeometriaMedium", fontSize: 12.sp);
   static TextStyle neutral800Txt = TextStyle(
@@ -35,15 +43,13 @@ abstract class TextStylee {
   static TextStyle white_text = TextStyle(
       color: Colors.white, fontFamily: "HelveticaRegular", fontSize: 14.sp);
   static TextStyle title_text = TextStyle(
-      color: Colors.black, fontFamily: "GeometriaMedium", fontSize: 24.sp);
+      color: Colors.black, fontFamily: "GeometriaMedium", fontSize: 25.sp);
   static TextStyle alert_title_text = TextStyle(
       color: colors.MainColor, fontFamily: "GeometriaMedium", fontSize: 28.sp);
   static TextStyle hobby_text = TextStyle(
       color: Colors.white, fontFamily: "GeometriaMedium", fontSize: 16.sp);
   static TextStyle inactive_hobby_text = TextStyle(
-      color: colors.oranjeColor,
-      fontFamily: "GeometriaMedium",
-      fontSize: 16.sp);
+      color: colors.MainColor, fontFamily: "GeometriaMedium", fontSize: 16.sp);
   static TextStyle subSubTitletext = TextStyle(
       color: colors.MainColor, fontFamily: "GeometriaMedium", fontSize: 10.sp);
   static TextStyle main_title_text = TextStyle(

@@ -9,14 +9,6 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 class ProfileOrganizerModel extends ChangeNotifier {
   List<Interesting> listInteresting = [
     Interesting(
-        picture: Image.asset('assets/image/book.png'),
-        label: 'Изучение языков'),
-    Interesting(
-        picture: Image.asset('assets/image/cook.png'), label: 'Кулинария'),
-    Interesting(
-        picture: Image.asset('assets/image/business.png'), label: 'Бизнес'),
-    Interesting(picture: Image.asset('assets/image/sport.png'), label: 'Спорт'),
-    Interesting(
         picture: Image.asset('assets/image/programming.png'),
         label: 'Программирование'),
   ];
@@ -27,6 +19,7 @@ class ProfileOrganizerModel extends ChangeNotifier {
   String Name = "";
   String Surname = "";
   String email = "";
+  String aboutMe = "";
 
   ProfileOrganizerModel() {
     _setup();
@@ -57,6 +50,7 @@ class ProfileOrganizerModel extends ChangeNotifier {
     Name = Profile.first_name;
     Surname = Profile.last_name;
     email = Profile.email;
+    aboutMe = Profile.about;
     notifyListeners();
   }
 

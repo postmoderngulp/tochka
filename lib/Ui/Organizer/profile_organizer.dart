@@ -52,6 +52,8 @@ class _subProfileScreenState extends State<subProfileAdminScreen>
   @override
   Widget build(BuildContext context) {
     final model = context.watch<ProfileOrganizerModel>();
+    String name = utf8.decode(model.Name.runes.toList());
+    String surname = utf8.decode(model.Surname.runes.toList());
     return SafeArea(
       child: Scaffold(
         floatingActionButton: const createEventButton(),
@@ -87,7 +89,7 @@ class _subProfileScreenState extends State<subProfileAdminScreen>
               ),
               Center(
                 child: Text(
-                  "${model.Name} ${model.Surname}",
+                  "$name $surname",
                   style: TextStylee.homepage_text,
                 ),
               ),
@@ -136,6 +138,8 @@ class _subProfileScreenState extends State<subProfileAdminScreen>
                 height: 32.h,
               ),
               TabBar(
+                  indicatorColor: Colors.transparent,
+                  dividerColor: Colors.transparent,
                   splashFactory: NoSplash.splashFactory,
                   labelColor: Colors.white,
                   controller: _tabController,
@@ -182,6 +186,7 @@ class AboutMe extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = context.watch<ProfileOrganizerModel>();
+    String aboutMe = utf8.decode(model.aboutMe.runes.toList());
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Padding(
@@ -198,9 +203,11 @@ class AboutMe extends StatelessWidget {
               height: 17.h,
             ),
             SizedBox(
-                width: 323.w,
-                child: Text(
-                    'Я нахожу вдохновение в природе, взаимодействии с людьми и исследовании различных культур. Мое творчество – это способ передать свои мысли и чувства через изобразительное искусство.')),
+              width: 323.w,
+              child: Text(aboutMe.isEmpty
+                  ? 'Я нахожу вдохновение в природе, взаимодействии с людьми и исследовании различных культур. Мое творчество – это способ передать свои мысли и чувства через изобразительное искусство.'
+                  : aboutMe),
+            ),
             SizedBox(
               height: 36.h,
             ),
@@ -432,7 +439,7 @@ class GroupEventItem extends StatelessWidget {
         utf8.decode(model.listMyEvent[index].address.runes.toList());
     return Container(
       width: 325.w,
-      height: 85.h,
+      height: 80.h,
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -461,7 +468,7 @@ class GroupEventItem extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(6)),
                   image: DecorationImage(
                       image: NetworkImage(
-                          "https://s3-alpha-sig.figma.com/img/cf8d/3fa4/f6d794fff88e926131fb33ec72ab3380?Expires=1701648000&Signature=PWO~~Zzi7k-V5fXdPHbR7tAC0nCfro53TChNQJeXU8wu4zkC6ncdlQdjLZ326xt6Vfc-DNa7SZwOJ2-HJnIm8MVU1ge7gA-xZJ-wLH~vVg4ttWUtbZW6vUzAyPnB00L~yIlR8v6x6zdm~CnaT-IcsP8nu7Vi-rUfsJoCgO2thd6TN~KluAnS1XdYV6BWecJTqKro4LgTb0FmsAfvXt0ph6jFMNk91wBIiFdN1jnJffC5Tc9eoQPa~gqNqixDn4Jrdtep1GY1ybYIrmfdFyF3JDZ1BUfSaClzmPm0dmG9LB5~2xz6NpyM6Un04DS1clXuAv~cVf6-VKzKm-fLaMNMSg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"),
+                          "https://s3-alpha-sig.figma.com/img/cf8d/3fa4/f6d794fff88e926131fb33ec72ab3380?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=fB9vqt45kICF-lkwVNUmhXyj92tow9G3jX79rVrmO4-ysYXArixZIuF0o~T6p2fpHp5dPhGTdEtuEJI8NJlxMCSL~mTrkAuqJlX4j3erQtWVEW-IpRgsVbfq~YPOuVhvS3exNeU9LRFgfxpsdmQKafjYNfh47TQ7PqgwdmyWfGFEsxbXH9lZpLlU0rjkWPGJZuo0C7vkoWMwBIEeJjwtc7dUyOF-9XsIREK302Ri3oNIPe9BXo6gxJkB8amidsu5lWQ7bG-c4egOdErK1N-wgxPXRaYZ1DCTlySqVcHuIiLO1jcGrjCGVjKXV93ul~~5QBWMyIJgxmVG0dusDrccSw__"),
                       fit: BoxFit.cover)),
             ),
           ),
@@ -469,7 +476,7 @@ class GroupEventItem extends StatelessWidget {
             width: 13.w,
           ),
           Padding(
-            padding: EdgeInsets.only(top: 20.h, bottom: 15.h),
+            padding: EdgeInsets.only(top: 13.h, bottom: 13.h),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -486,7 +493,7 @@ class GroupEventItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SvgPicture.asset(
@@ -499,7 +506,7 @@ class GroupEventItem extends StatelessWidget {
                           ),
                           Text(
                             time,
-                            style: TextStylee.subTitleGroup,
+                            style: TextStylee.soraEvent,
                           )
                         ]),
                     SizedBox(
@@ -516,7 +523,7 @@ class GroupEventItem extends StatelessWidget {
                       ),
                       Text(
                         address,
-                        style: TextStylee.subTitleGroup,
+                        style: TextStylee.soraEvent,
                       )
                     ]),
                   ],

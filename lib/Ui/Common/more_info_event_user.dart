@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:Tochka_Sbora/Domain/Entity/event.dart';
 import 'package:Tochka_Sbora/Domain/Models/commonModel/moreInfoUserBloc.dart';
+import 'package:Tochka_Sbora/Navigation/navigation.dart';
 import 'package:Tochka_Sbora/style/styles/button_style.dart';
 import 'package:Tochka_Sbora/style/styles/colors.dart';
 import 'package:Tochka_Sbora/style/styles/text_style.dart';
@@ -15,8 +16,9 @@ class moreInfoEventUser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Event = ModalRoute.of(context)!.settings.arguments as event;
     return Provider(
-      create: (context) => MoreInfoScreenBloc(),
+      create: (context) => MoreInfoScreenBloc(Event),
       child: const subMoreinfoEvent(),
     );
   }
@@ -159,7 +161,7 @@ class subMoreinfoEvent extends StatelessWidget {
                             style: Buttonstyle.yeloww_button_style,
                             child: Text(
                               "Я иду",
-                              style: TextStylee.Subsecond_text,
+                              style: TextStylee.Subsecond_text_black,
                             ),
                           ),
                         ),
@@ -243,7 +245,8 @@ class backButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () => Navigator.of(context).pop(),
+        onTap: () => Navigator.of(context).pushNamedAndRemoveUntil(
+            NavigationRoutes.MainScreenUser, (route) => false),
         child: SvgPicture.asset(
           "assets/image/arrow-left.svg",
           width: 22.w,

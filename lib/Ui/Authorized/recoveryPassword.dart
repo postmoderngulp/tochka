@@ -1,5 +1,6 @@
 import 'package:Tochka_Sbora/Domain/Models/authModel/recovery_password_model.dart';
 import 'package:Tochka_Sbora/style/styles/button_style.dart';
+import 'package:Tochka_Sbora/style/styles/colors.dart';
 import 'package:Tochka_Sbora/style/styles/text_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -97,6 +98,7 @@ class EmailField extends StatelessWidget {
               "assets/image/Message.svg",
               width: 22.w,
               height: 22.h,
+              colorFilter: ColorFilter.mode(colors.neutral300, BlendMode.srcIn),
             ),
           ),
           padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 14.w),
@@ -105,9 +107,9 @@ class EmailField extends StatelessWidget {
           onEditingComplete: () => FocusScope.of(context).nextFocus(),
           onChanged: (value) {},
           placeholder: "abc@email.com",
-          placeholderStyle: TextStylee.second_text,
+          placeholderStyle: TextStylee.fieldStyle,
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
+            border: Border.all(color: colors.border),
             color: Colors.white,
             borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),

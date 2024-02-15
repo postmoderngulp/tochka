@@ -116,7 +116,6 @@ class EntryBloc {
       const storage = FlutterSecureStorage();
       await storage.write(key: "refresh", value: token.refresh);
       await storage.write(key: "access", value: token.access);
-
       int id = 0;
       String Token = token.access.split(".")[1];
       List<int> res = base64.decode(base64.normalize(Token));
@@ -126,7 +125,6 @@ class EntryBloc {
       final startIndex = decodeVal.indexOf(start);
       final endIndex = decodeVal.indexOf(end, startIndex + start.length);
       final Id = decodeVal.substring(startIndex + start.length, endIndex);
-
       final listProfile = await api.getAllProfile();
       listProfile.forEach((element) {
         if (element.user_id == int.parse(Id)) id = element.id!;
